@@ -17,6 +17,8 @@ public class Squadra {
 	private int punti= 3*(partiteVinte) + partitePareggiate;
 	private int mediaInglese = (-2) * partitePareggiateCasa + (-3) * partitePerseCasa + 2 * partiteVinteTrasferta + (-1) * partitePerseTrasferta;
 	private int totPartite= partiteVinte + partitePareggiate + partitePerse;
+	private int totPartiteCasa= partiteVinteCasa + partitePareggiateCasa + partitePerseCasa;
+	private int totPartiteTrasferta= partiteVinteTrasferta + partitePareggiateTrasferta + partitePerseTrasferta;
 	private int differenzaGol= golFatti - golSubiti;
 	
 	Squadra(String nomeSquadra, int partiteVinteCasa, int partiteVinteTrasferta, int partitePareggiateCasa, int partitePareggiateTrasferta,
@@ -54,73 +56,48 @@ public class Squadra {
 	int getTotPartite() {return totPartite;}
 	int getDifferenzaGol() {return differenzaGol;}
 	int getMediaInglese() {return mediaInglese;}
+
 	
-	void aggSquadra() {
-		System.out.println("Inserisci il nome della prima squadra da aggiungere:\n");
-		nomeSquadra = scanner.nextLine();
-		System.out.println("Inserisci il numero di partite VINTE in CASA:\n");
-		partiteVinteCasa = scanner.nextInt();
-		System.out.println("Inserisci il numero di partite VINTE in TRASFERTA:\n");
-		partiteVinteTrasferta = scanner.nextInt();
-		System.out.println("Inserisci il numero di partite PAREGGIATE in CASA:\n");
-		partitePareggiateCasa = scanner.nextInt();
-		System.out.println("Inserisci il numero di partite PAREGGIATE in TRASFERTA:\n");
-		partitePareggiateTrasferta = scanner.nextInt();
-		System.out.println("Inserisci il numero di partite PERSE in CASA:\n");
-		partitePerseCasa = scanner.nextInt();
-		System.out.println("Inserisci il numero di partite PERSE in TRASFERTA:\n");
-		partitePerseTrasferta = scanner.nextInt();
-		System.out.println("Inserisci il numero di GOL FATTI in CASA:\n");
-		golFattiCasa = scanner.nextInt();
-		System.out.println("Inserisci il numero di GOL FATTI in TRASFERTA:\n");
-		golFattiTrasferta = scanner.nextInt();
-		System.out.println("Inserisci il numero di GOL SUBITI in CASA:\n");
-		golSubitiCasa = scanner.nextInt();
-		System.out.println("Inserisci il numero di GOL SUBITI in TRASFERTA:\n");
-		golSubitiTrasferta = scanner.nextInt();
-		return;
-	}
-	
-	int setPartiteVinteCasa(int aggParVinteCasa, boolean scelta) {
-		if (scelta=true) 
+	int setPartiteVinteCasa(int aggParVinteCasa, int scelta) {
+		if (scelta==1) 
 			{partiteVinteCasa+=aggParVinteCasa;}
 		else 
 			{partiteVinteCasa-=aggParVinteCasa;}
 		return partiteVinteCasa;
 		}
-	int setPartiteVinteTrasferta(int aggParVinteTrasferta, boolean scelta) {
-		if (scelta=true) 
+	int setPartiteVinteTrasferta(int aggParVinteTrasferta, int scelta) {
+		if (scelta==1) 
 			{partiteVinteTrasferta+=aggParVinteTrasferta;}
 		else 
 			{partiteVinteTrasferta-=aggParVinteTrasferta;}
 		return partiteVinteTrasferta;
 		}
 	
-	int setPartitePareggiateCasa(int aggParPareggiateCasa, boolean scelta) {
-		if (scelta=true) 
+	int setPartitePareggiateCasa(int aggParPareggiateCasa, int scelta) {
+		if (scelta==1) 
 			{partitePareggiateCasa+=aggParPareggiateCasa;}
 		else 
 			{partitePareggiateCasa-=aggParPareggiateCasa;}
 		return partitePareggiateCasa;
 		}
 	
-	int setPartitePareggiateTrasferta(int aggParPareggiateTrasferta, boolean scelta) {
-		if (scelta=true) 
+	int setPartitePareggiateTrasferta(int aggParPareggiateTrasferta, int scelta) {
+		if (scelta==1) 
 			{partitePareggiateTrasferta+=aggParPareggiateTrasferta;}
 		else 
 			{partitePareggiateTrasferta-=aggParPareggiateTrasferta;}
 		return partitePareggiateTrasferta;
 		}
 	
-	int setPartitePerseCasa(int aggParPerseCasa, boolean scelta) {
-		if (scelta=true) 
+	int setPartitePerseCasa(int aggParPerseCasa, int scelta) {
+		if (scelta==1) 
 		{partitePerseCasa+=aggParPerseCasa;}
 	else 
 		{partitePerseCasa-=aggParPerseCasa;}
 		return partitePerseCasa;
 		}
-	int setPartitePerseTrasferta(int aggParPerseTrasferta, boolean scelta) {
-		if (scelta=true) 
+	int setPartitePerseTrasferta(int aggParPerseTrasferta, int scelta) {
+		if (scelta==1) 
 		{partitePerseTrasferta+=aggParPerseTrasferta;}
 	else 
 		{partitePerseTrasferta-=aggParPerseTrasferta;}
@@ -128,37 +105,50 @@ public class Squadra {
 		}
 
 	
-	int setGolFattiCasa(int aggGolFattiCasa, boolean scelta) {
-		if (scelta=true) 
+	int setGolFattiCasa(int aggGolFattiCasa, int scelta) {
+		if (scelta==1) 
 		{golFattiCasa+=aggGolFattiCasa;}
 	else 
 		{golFattiCasa-=aggGolFattiCasa;}
 		return golFattiCasa;
 		}
 	
-	int setGolFattiTrasferta(int aggGolFattiTrasferta, boolean scelta) {
-		if (scelta=true) 
+	int setGolFattiTrasferta(int aggGolFattiTrasferta, int scelta) {
+		if (scelta==1) 
 		{golFattiTrasferta+=aggGolFattiTrasferta;}
 	else 
 		{golFattiTrasferta-=aggGolFattiTrasferta;}
 		return golFattiTrasferta;
 		}
 	
-	int setGolSubitiCasa(int aggGolSubitiCasa, boolean scelta) {
-		if (scelta=true) 
+	int setGolSubitiCasa(int aggGolSubitiCasa, int scelta) {
+		if (scelta==1) 
 		{golSubitiCasa+=aggGolSubitiCasa;}
 	else 
 		{golSubitiCasa-=aggGolSubitiCasa;}
 		return golSubitiCasa;
 		}
 	
-	int setGolSubitiTrasferta(int aggGolSubitiTrasferta, boolean scelta) {
-		if (scelta=true) 
+	int setGolSubitiTrasferta(int aggGolSubitiTrasferta, int scelta) {
+		if (scelta==1) 
 		{golSubitiTrasferta+=aggGolSubitiTrasferta;}
 	else 
 		{golSubitiTrasferta-=aggGolSubitiTrasferta;}
 		return golSubiti;
 		}
+	
+	void visualizzaDettagli() {
+		System.out.println("Ecco i dettagli di " + nomeSquadra + ":\n"
+				+ "Partite Vinte: " + partiteVinte + " di cui " + partiteVinteCasa + " in Casa e " + partiteVinteTrasferta + " in Trasferta\n"
+				+ "Partite Pareggiate: " + partitePareggiate + " di cui " + partitePareggiateCasa + " in Casa e " + partitePareggiateTrasferta + " in Trasferta\n"
+				+ "Partite Perse: " + partitePerse + " di cui " + partitePerseCasa + " in Casa e " + partitePerseTrasferta + " in Trasferta\n"
+				+ "Totale Partite Giocate: " + totPartite + " di cui " + totPartiteCasa + " in Casa e " + totPartiteTrasferta + " in Trasferta\n"
+				+ "Gol Fatti" + golFatti + " di cui " + golFattiCasa + " in Casa e " + golFattiTrasferta + " in Trasferta\n"
+				+ "Gol Subiti" + golSubiti + " di cui " + golSubitiCasa + " in Casa e " + golSubitiTrasferta + " in Trasferta\n"
+				+ "Differenza Gol Fatti - Gol Subiti:" + differenzaGol + "\n"
+				+ "Punti: " + punti + "\n"
+				+ "Media Inglese:" + mediaInglese + "\n");			
+	}
 	
 	void azzeraPartite() {
 		partiteVinteCasa= 0;
