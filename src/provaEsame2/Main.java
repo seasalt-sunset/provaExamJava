@@ -175,7 +175,7 @@ public class Main {
 				System.out.println("Scrivi il nome della Squadra di cui vuoi modificare i gol:\n");
 				nomeSquadra = scanner.nextLine();
 				squadra = TrovaSquadra(nomeSquadra, listaSquadre);
-				if (nomeSquadra == squadra.getNomeSquadra()) {
+				if (nomeSquadra.equalsIgnoreCase(squadra.getNomeSquadra())) {
 					System.out.println("Scegli tra le varie opzioni. Digita:\n"
 							+ "1)Se vuoi cambiare il valore dei gol FATTI\n"
 							+ "2)Se vuoi cambiare il valore dei gol SUBITI\n");
@@ -188,7 +188,7 @@ public class Main {
 							+ "1) Se vuoi aggiungere gol\n"
 							+ "0) Se vuoi togliere gol");
 					scelta= scanner.nextInt();
-					switch (fattiOSubiti + "-" + casaOTrasferta + "-") {
+					switch (fattiOSubiti + "-" + casaOTrasferta) {
 						case "1-1":
 							System.out.println("I gol FATTI in CASA da " + squadra.getNomeSquadra() +" sono " + squadra.getGolFattiCasa() + ".\n"
 									+ "Quanti gol vuoi aggiungere/togliere? (scrivi il numero senza il simbolo -)");
@@ -222,7 +222,7 @@ public class Main {
 				System.out.println("Scrivi il nome della Squadra di cui vuoi visualizzare i punti:\n");
 				nomeSquadra = scanner.nextLine();
 				squadra = TrovaSquadra(nomeSquadra, listaSquadre);
-				if (nomeSquadra == squadra.getNomeSquadra()) {
+				if (nomeSquadra.equalsIgnoreCase(squadra.getNomeSquadra())) {
 					System.out.println("I punti totalizzati da " + squadra.getNomeSquadra() + "sono " + squadra.getPunti()+".\n"
 							+ "La media inglese e' " + squadra.getMediaInglese());
 				}
@@ -234,8 +234,17 @@ public class Main {
 				System.out.println("Scrivi il nome della Squadra di cui vuoi visualizzare i dettagli:\n");
 				nomeSquadra = scanner.nextLine();
 				squadra = TrovaSquadra(nomeSquadra, listaSquadre);
-				if (nomeSquadra == squadra.getNomeSquadra()) {
-					squadra.visualizzaDettagli();
+				if (nomeSquadra.equalsIgnoreCase(squadra.getNomeSquadra())) {
+					System.out.println("Ecco i dettagli di " + nomeSquadra + ":\n"
+							+ "Partite Vinte: " + squadra.getPartiteVinte() + " di cui " + squadra.getPartiteVinteCasa() + " in Casa e " + squadra.getPartiteVinteTrasferta() + " in Trasferta\n"
+							+ "Partite Pareggiate: " + squadra.getPartitePareggiate() + " di cui " + squadra.getPartitePareggiateCasa() + " in Casa e " + squadra.getPartitePareggiateTrasferta() + " in Trasferta\n"
+							+ "Partite Perse: " + squadra.getPartitePerse() + " di cui " + squadra.getPartitePerseCasa() + " in Casa e " + squadra.getPartitePerseTrasferta() + " in Trasferta\n"
+							+ "Totale Partite Giocate: " + squadra.getTotPartite() + " di cui " + squadra.getTotPartiteCasa() + " in Casa e " + squadra.getTotPartiteTrasferta() + " in Trasferta\n"
+							+ "Gol Fatti: " + squadra.getGolFatti() + " di cui " + squadra.getGolFattiCasa() + " in Casa e " + squadra.getGolFattiTrasferta() + " in Trasferta\n"
+							+ "Gol Subiti: " + squadra.getGolSubiti() + " di cui " + squadra.getGolSubitiCasa() + " in Casa e " + squadra.getGolSubitiTrasferta() + " in Trasferta\n"
+							+ "Differenza Gol Fatti - Gol Subiti: " + squadra.getDifferenzaGol() + "\n"
+							+ "Punti: " + squadra.getPunti() + "\n"
+							+ "Media Inglese: " + squadra.getMediaInglese() + "\n");	
 				}
 				else {
 					System.out.println("Squadra non trovata");

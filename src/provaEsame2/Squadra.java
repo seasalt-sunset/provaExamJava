@@ -8,11 +8,11 @@ public class Squadra {
 	private int partiteVinteCasa, partiteVinteTrasferta, partitePareggiateCasa, partitePareggiateTrasferta, partitePerseCasa, partitePerseTrasferta;
 	private int golFattiCasa, golSubitiCasa, golFattiTrasferta, golSubitiTrasferta;
 	
-	private int golFatti = golFattiCasa + golFattiTrasferta;
-	private int golSubiti = golSubitiCasa + golSubitiTrasferta;
-	private int partiteVinte = partiteVinteCasa + partiteVinteTrasferta;
-	private int partitePareggiate = partitePareggiateCasa + partitePareggiateTrasferta;
-	private int partitePerse = partitePerseCasa + partitePerseTrasferta;
+	private int golFatti;
+	private int golSubiti;
+	private int partiteVinte;
+	private int partitePareggiate;
+	private int partitePerse;
 	
 	private int punti= 3*(partiteVinte) + partitePareggiate;
 	private int mediaInglese = (-2) * partitePareggiateCasa + (-3) * partitePerseCasa + 2 * partiteVinteTrasferta + (-1) * partitePerseTrasferta;
@@ -27,7 +27,7 @@ public class Squadra {
 		this.partiteVinteCasa=partiteVinteCasa;
 		this.partitePareggiateCasa=partitePareggiateCasa;
 		this.partitePerseCasa=partitePerseCasa;
-		this.partiteVinteTrasferta=partiteVinte;
+		this.partiteVinteTrasferta=partiteVinteTrasferta;
 		this.partitePareggiateTrasferta=partitePareggiateTrasferta;
 		this.partitePerseTrasferta=partitePerseTrasferta;
 		this.golFattiCasa=golFattiCasa;
@@ -39,23 +39,25 @@ public class Squadra {
 	String getNomeSquadra() {return nomeSquadra;}
 	int getPartiteVinteCasa() {return partiteVinteCasa;}
 	int getPartiteVinteTrasferta() {return partiteVinteTrasferta;}
-	int getPartiteVinte() {return partiteVinte;}
+	int getPartiteVinte() {return partiteVinteCasa + partiteVinteTrasferta;}
 	int getPartitePareggiateCasa() {return partitePareggiateCasa;}
 	int getPartitePareggiateTrasferta() {return partitePareggiateTrasferta;}
-	int getPartitePareggiate() {return partitePareggiate;}
+	int getPartitePareggiate() {return partitePareggiateCasa + partitePareggiateTrasferta;}
 	int getPartitePerseCasa() {return partitePerseCasa;}
 	int getPartitePerseTrasferta() {return partitePerseTrasferta;}
-	int getPartitePerse() {return partitePerse;}
-	int getGolFatti() {return golFatti;}
-	int getGolSubiti() {return golSubiti;}
+	int getPartitePerse() {return partitePerseCasa + partitePerseTrasferta;}
+	int getGolFatti() {return golFattiCasa + golFattiTrasferta;}
+	int getGolSubiti() {return golSubitiCasa + golSubitiTrasferta;}
 	int getGolFattiCasa() {return golFattiCasa;}
 	int getGolSubitiCasa() {return golSubitiCasa;}
 	int getGolFattiTrasferta() {return golFattiTrasferta;}
 	int getGolSubitiTrasferta() {return golSubitiTrasferta;}
-	int getPunti() {return punti;}
-	int getTotPartite() {return totPartite;}
-	int getDifferenzaGol() {return differenzaGol;}
-	int getMediaInglese() {return mediaInglese;}
+	int getPunti() {return 3*(partiteVinteCasa + partiteVinteTrasferta) + partitePareggiateCasa + partitePareggiateTrasferta;}
+	int getTotPartite() {return partiteVinteCasa + partitePareggiateCasa + partitePerseCasa + partiteVinteTrasferta + partitePareggiateTrasferta + partitePerseTrasferta;}
+	int getTotPartiteCasa() {return partiteVinteCasa + partitePareggiateCasa + partitePerseCasa;}
+	int getTotPartiteTrasferta() {return partiteVinteTrasferta + partitePareggiateTrasferta + partitePerseTrasferta;}
+	int getDifferenzaGol() {return golFattiCasa + golFattiTrasferta - golSubitiCasa - golSubitiTrasferta;}
+	int getMediaInglese() {return (-2) * partitePareggiateCasa + (-3) * partitePerseCasa + 2 * partiteVinteTrasferta + (-1) * partitePerseTrasferta;}
 
 	
 	int setPartiteVinteCasa(int aggParVinteCasa, int scelta) {
