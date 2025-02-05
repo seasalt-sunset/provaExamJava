@@ -60,82 +60,54 @@ public class Squadra {
 	int getMediaInglese() {return (-2) * partitePareggiateCasa + (-3) * partitePerseCasa + 2 * partiteVinteTrasferta + (-1) * partitePerseTrasferta;}
 
 	
-	int setPartiteVinteCasa(int aggParVinteCasa, int scelta) {
-		if (scelta==1) 
-			{partiteVinteCasa+=aggParVinteCasa;}
-		else 
-			{partiteVinteCasa-=aggParVinteCasa;}
+	int setPartiteVinteCasa(int aggParVinteCasa) {
+		partiteVinteCasa+=aggParVinteCasa;
 		return partiteVinteCasa;
 		}
-	int setPartiteVinteTrasferta(int aggParVinteTrasferta, int scelta) {
-		if (scelta==1) 
-			{partiteVinteTrasferta+=aggParVinteTrasferta;}
-		else 
-			{partiteVinteTrasferta-=aggParVinteTrasferta;}
+	
+	int setPartiteVinteTrasferta(int aggParVinteTrasferta) {
+		partiteVinteTrasferta+=aggParVinteTrasferta;
 		return partiteVinteTrasferta;
 		}
 	
-	int setPartitePareggiateCasa(int aggParPareggiateCasa, int scelta) {
-		if (scelta==1) 
-			{partitePareggiateCasa+=aggParPareggiateCasa;}
-		else 
-			{partitePareggiateCasa-=aggParPareggiateCasa;}
+	int setPartitePareggiateCasa(int aggParPareggiateCasa) {
+		partitePareggiateCasa+=aggParPareggiateCasa;
 		return partitePareggiateCasa;
 		}
 	
-	int setPartitePareggiateTrasferta(int aggParPareggiateTrasferta, int scelta) {
-		if (scelta==1) 
-			{partitePareggiateTrasferta+=aggParPareggiateTrasferta;}
-		else 
-			{partitePareggiateTrasferta-=aggParPareggiateTrasferta;}
+	int setPartitePareggiateTrasferta(int aggParPareggiateTrasferta) {
+		partitePareggiateTrasferta+=aggParPareggiateTrasferta;
 		return partitePareggiateTrasferta;
 		}
 	
-	int setPartitePerseCasa(int aggParPerseCasa, int scelta) {
-		if (scelta==1) 
-		{partitePerseCasa+=aggParPerseCasa;}
-	else 
-		{partitePerseCasa-=aggParPerseCasa;}
+	int setPartitePerseCasa(int aggParPerseCasa) {
+		partitePerseCasa+=aggParPerseCasa;
 		return partitePerseCasa;
 		}
-	int setPartitePerseTrasferta(int aggParPerseTrasferta, int scelta) {
-		if (scelta==1) 
-		{partitePerseTrasferta+=aggParPerseTrasferta;}
-	else 
-		{partitePerseTrasferta-=aggParPerseTrasferta;}
+
+	int setPartitePerseTrasferta(int aggParPerseTrasferta) {
+		partitePerseTrasferta+=aggParPerseTrasferta;
 		return partitePerseTrasferta;
 		}
 
 	
-	int setGolFattiCasa(int aggGolFattiCasa, int scelta) {
-		if (scelta==1) 
-		{golFattiCasa+=aggGolFattiCasa;}
-	else 
-		{golFattiCasa-=aggGolFattiCasa;}
+	int setGolFattiCasa(int aggGolFattiCasa) {
+		golFattiCasa+=aggGolFattiCasa;
 		return golFattiCasa;
 		}
 	
-	int setGolFattiTrasferta(int aggGolFattiTrasferta, int scelta) {
-		if (scelta==1) 
-		{golFattiTrasferta+=aggGolFattiTrasferta;}
-	else 
-		{golFattiTrasferta-=aggGolFattiTrasferta;}
+	int setGolFattiTrasferta(int aggGolFattiTrasferta) {
+		golFattiTrasferta+=aggGolFattiTrasferta;
 		return golFattiTrasferta;
 		}
 	
-	int setGolSubitiCasa(int aggGolSubitiCasa, int scelta) {
-		if (scelta==1) 
-		{golSubitiCasa+=aggGolSubitiCasa;}
-	else 
-		{golSubitiCasa-=aggGolSubitiCasa;}
+	int setGolSubitiCasa(int aggGolSubitiCasa) {
+		golSubitiCasa+=aggGolSubitiCasa;
 		return golSubitiCasa;
 		}
 	
-	int setGolSubitiTrasferta(int aggGolSubitiTrasferta, int scelta) {
-		if (scelta==1) 
-		{golSubitiTrasferta+=aggGolSubitiTrasferta;}
-	else 
-		{golSubitiTrasferta-=aggGolSubitiTrasferta;}
+	int setGolSubitiTrasferta(int aggGolSubitiTrasferta) {
+		golSubitiTrasferta+=aggGolSubitiTrasferta;
 		return golSubiti;
 		}
 	
