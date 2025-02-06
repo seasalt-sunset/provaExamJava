@@ -108,7 +108,7 @@ public class Squadra {
 	
 	int setGolSubitiTrasferta(int aggGolSubitiTrasferta) {
 		golSubitiTrasferta+=aggGolSubitiTrasferta;
-		return golSubiti;
+		return golSubitiTrasferta;
 		}
 	
 	void visualizzaDettagli() {

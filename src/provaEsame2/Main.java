@@ -5,13 +5,7 @@ import java.util.ArrayList;
 public class Main {
 
 	public static void main(String[] args) {
-		String nomeSquadra;
-		int pVinteCasa=0, pVinteTrasferta=0, pPareggiateCasa=0, pPareggiateTrasferta=0, pPerseCasa=0, pPerseTrasferta = 0;
-		int golFattiCasa=0, golSubitiCasa=0, golFattiTrasferta=0, golSubitiTrasferta=0;
-		int sceltaMenu, vinteOPerse, casaOTrasferta, fattiOSubiti;
-		int quantitaModifica;
-		int scelta;
-		Squadra squadra;
+		int sceltaMenu;
 		ArrayList <Squadra> listaSquadre = new ArrayList <>();
 		Scanner scanner = new Scanner (System.in);
 		
@@ -50,6 +44,7 @@ public class Main {
 				break;
 			case 6:
 				Classifica(listaSquadre, scanner);
+				break;
 			case 7:
 				AzzeraPunteggio(listaSquadre, scanner);
 				break;
@@ -73,7 +68,6 @@ public class Main {
 				return elencoSquadre.get(i);
 			}
 		}
-		System.out.println("Nessuna squadra trovata");
 		return null;
 	}
 	
@@ -112,82 +106,87 @@ public class Main {
 		boolean casa, trasferta;
 		casa=false; trasferta=false;
 		int casaOTrasferta, vinteOPerse;
-		System.out.println("Scrivi il nome della Squadra di cui vuoi modificare le partite:\n");
-		String nomeSquadra = scanner.nextLine();
-		Squadra squadra = TrovaSquadra(nomeSquadra, elencoSquadre);
-		if (nomeSquadra.equalsIgnoreCase(squadra.getNomeSquadra())) {
-			do {
-				System.out.println("Vuoi cambiare il valore delle partite giocate in CASA (digita 1), in TRASFERTA (digita 2) o ENTRAMBE (digita 3)?\n");
-				casaOTrasferta = scanner.nextInt();
-				switch(casaOTrasferta) {
-				case 1: 
-					casa=true;
-					break;
-				case 2:
-					trasferta=true;
-					break;
-				case 3:
-					casa=true;
-					trasferta=true;
-					break;
-				default:
+		Squadra squadra;
+		do {
+			System.out.println("Scrivi il nome della Squadra di cui vuoi modificare le partite.\nScrivi 'menu' per tornare al menu principale\n");
+			String nomeSquadra = scanner.nextLine();
+			if(nomeSquadra.equalsIgnoreCase("menu")) {
+				return;
+			}
+			squadra = TrovaSquadra(nomeSquadra, elencoSquadre);
+			if (squadra==null) {
+				System.out.println("Nessuna squadra trovata.");
+			}
+		} while (squadra==null);
+		
+		do {
+			System.out.println("Vuoi cambiare il valore delle partite giocate in CASA (digita 1), in TRASFERTA (digita 2) o ENTRAMBE (digita 3)?\n");
+			casaOTrasferta = scanner.nextInt();
+			switch(casaOTrasferta) {
+			case 1: 
+				casa=true;
+				break;
+			case 2:
+				trasferta=true;
+				break;
+			case 3:
+				casa=true;
+				trasferta=true;
+				break;
+			default:
+				System.out.println("Valore inserito non corretto.");
+				break;
+			}
+		} while(casaOTrasferta<1 && casaOTrasferta>3);
+		do {
+			System.out.println("Scegli tra le varie opzioni. Digita:\n"
+					+ "1)Se vuoi cambiare il valore delle partite VINTE\n"
+					+ "2)Se vuoi cambiare il valore delle partite PERSE\n"
+					+ "3)se vuoi cambiare il valore delle partite PAREGGIATE\n"
+					+ "4)se vuoi cambiarle TUTTE\n");
+			vinteOPerse = scanner.nextInt();
+			if (vinteOPerse<1 || vinteOPerse>4) {
 					System.out.println("Valore inserito non corretto.");
-					break;
-				}
-			} while(casaOTrasferta<1 && casaOTrasferta>3);
-			do {
-				System.out.println("Scegli tra le varie opzioni. Digita:\n"
-						+ "1)Se vuoi cambiare il valore delle partite VINTE\n"
-						+ "2)Se vuoi cambiare il valore delle partite PERSE\n"
-						+ "3)se vuoi cambiare il valore delle partite PAREGGIATE\n"
-						+ "4)se vuoi cambiarle TUTTE\n");
-				vinteOPerse = scanner.nextInt();
-				if (vinteOPerse<1 || vinteOPerse>4) {
-						System.out.println("Valore inserito non corretto.");
-				}
-				} while (vinteOPerse<1 && vinteOPerse>4); 
-			
-			switch (vinteOPerse) {
-				case 1:
-						if (casa==true) {
-							ModificaPartiteVinteCasa(squadra, scanner);
-						}
-						if (trasferta==true) {
-							ModificaPartiteVinteTrasferta(squadra, scanner);
-						}
-					break;
-				case 2:
-					if (casa==true) {
-						ModificaPartitePerseCasa(squadra, scanner);
-					}
-					if (trasferta==true) {
-						ModificaPartitePerseTrasferta(squadra, scanner);
-					}
-					break;
-				case 3:
-					if (casa==true) {
-						ModificaPartitePareggiateCasa(squadra, scanner);
-					}
-					if (trasferta==true) {
-						ModificaPartitePareggiateTrasferta(squadra, scanner);
-					}
-					break;
-				case 4:
+			}
+			} while (vinteOPerse<1 && vinteOPerse>4); 
+		
+		switch (vinteOPerse) {
+			case 1:
 					if (casa==true) {
 						ModificaPartiteVinteCasa(squadra, scanner);
-						ModificaPartitePerseCasa(squadra, scanner);
-						ModificaPartitePareggiateCasa(squadra, scanner);
 					}
 					if (trasferta==true) {
 						ModificaPartiteVinteTrasferta(squadra, scanner);
-						ModificaPartitePerseTrasferta(squadra, scanner);
-						ModificaPartitePareggiateTrasferta(squadra, scanner);
 					}
-					break;
-			}
-		} else {
-			System.out.println("Nessuna squadra trovata.");
-			return;
+				break;
+			case 2:
+				if (casa==true) {
+					ModificaPartitePerseCasa(squadra, scanner);
+				}
+				if (trasferta==true) {
+					ModificaPartitePerseTrasferta(squadra, scanner);
+				}
+				break;
+			case 3:
+				if (casa==true) {
+					ModificaPartitePareggiateCasa(squadra, scanner);
+				}
+				if (trasferta==true) {
+					ModificaPartitePareggiateTrasferta(squadra, scanner);
+				}
+				break;
+			case 4:
+				if (casa==true) {
+					ModificaPartiteVinteCasa(squadra, scanner);
+					ModificaPartitePerseCasa(squadra, scanner);
+					ModificaPartitePareggiateCasa(squadra, scanner);
+				}
+				if (trasferta==true) {
+					ModificaPartiteVinteTrasferta(squadra, scanner);
+					ModificaPartitePerseTrasferta(squadra, scanner);
+					ModificaPartitePareggiateTrasferta(squadra, scanner);
+				}
+				break;
 		}
 	}
 	
@@ -242,93 +241,113 @@ public class Main {
 	
 	public static void ModificaGol(ArrayList <Squadra> elencoSquadre, Scanner scanner) {
 		int fattiOSubiti, casaOTrasferta, quantitaModifica;
-		System.out.println("Scrivi il nome della Squadra di cui vuoi modificare i gol:\n");
-		String nomeSquadra = scanner.nextLine();
-		Squadra squadra = TrovaSquadra(nomeSquadra, elencoSquadre);
-		if (nomeSquadra.equalsIgnoreCase(squadra.getNomeSquadra())) {
-			do {
-				System.out.println("Scegli tra le varie opzioni. Digita:\n"
-					+ "1)Se vuoi cambiare il valore dei gol FATTI\n"
-					+ "2)Se vuoi cambiare il valore dei gol SUBITI\n");
-			fattiOSubiti= scanner.nextInt();
-			if(fattiOSubiti!=1 && fattiOSubiti!=2) {
+		Squadra squadra;
+		do {
+			System.out.println("Scrivi il nome della Squadra di cui vuoi modificare i gol:\n");
+			String nomeSquadra = scanner.nextLine();
+			if(nomeSquadra.equalsIgnoreCase("menu")) {
+				return;
+			}
+			squadra = TrovaSquadra(nomeSquadra, elencoSquadre);
+			if (squadra==null) {
+				System.out.println("Nessuna squadra trovata.");
+			}
+		} while (squadra==null);
+		
+		do {
+			System.out.println("Scegli tra le varie opzioni. Digita:\n"
+				+ "1)Se vuoi cambiare il valore dei gol FATTI\n"
+				+ "2)Se vuoi cambiare il valore dei gol SUBITI\n");
+		fattiOSubiti= scanner.nextInt();
+		if(fattiOSubiti!=1 && fattiOSubiti!=2) {
+			System.out.println("Input errato!");
+		}
+		} while (fattiOSubiti!=1 && fattiOSubiti!=2);
+		
+		do {
+			System.out.println("Digita:\n"
+					+ "1) Se vuoi cambiare il valore dei gol nelle partite giocate in CASA\n"
+					+ "2) Se vuoi cambiare il valore dei gol nelle partite giocate in TRASFERTA\n");
+			casaOTrasferta= scanner.nextInt();
+			scanner.nextLine();
+			if(casaOTrasferta!=1 && casaOTrasferta!=2) {
 				System.out.println("Input errato!");
 			}
-			} while (fattiOSubiti!=1 && fattiOSubiti!=2);
-			do {
-				System.out.println("Digita:\n"
-						+ "1) Se vuoi cambiare il valore dei gol nelle partite giocate in CASA\n"
-						+ "2) Se vuoi cambiare il valore dei gol nelle partite giocate in TRASFERTA\n");
-				casaOTrasferta= scanner.nextInt();
-				scanner.nextLine();
-				if(casaOTrasferta!=1 && casaOTrasferta!=2) {
-					System.out.println("Input errato!");
-				}
-			} while (casaOTrasferta!=1 && casaOTrasferta!=2);
-			
-			switch (fattiOSubiti + "-" + casaOTrasferta) {
-				case "1-1":
-					System.out.println("I gol FATTI in CASA da " + squadra.getNomeSquadra() +" sono " + squadra.getGolFattiCasa() + ".\n"
-							+ "Quanti gol vuoi aggiungere/togliere? (scrivi il numero senza il simbolo -)");
-					quantitaModifica= scanner.nextInt();
-					System.out.println("Modifica apportata. I gol FATTI in CASA da " + squadra.getNomeSquadra() +" sono ora " + squadra.setGolFattiCasa(quantitaModifica) + ".\n");
-					break;
-					
-				case "1-2":
-					System.out.println("I gol FATTI in TRASFERTA da " + squadra.getNomeSquadra() +" sono " + squadra.getGolFattiTrasferta() + ".\n"
-							+ "Quanti gol vuoi aggiungere/togliere? (scrivi il numero senza il simbolo -)");
-					quantitaModifica= scanner.nextInt();
-					System.out.println("Modifica apportata. I gol FATTI in TRASFERTA da " + squadra.getNomeSquadra() +" sono ora " + squadra.setGolFattiTrasferta(quantitaModifica) + ".\n");
-					break;
-				case "2-1":
-					System.out.println("I gol SUBITI in CASA da " + squadra.getNomeSquadra() +" sono " + squadra.getGolSubitiCasa() + ".\n"
-							+ "Quanti gol vuoi aggiungere/togliere? (scrivi il numero senza il simbolo -)");
-					quantitaModifica= scanner.nextInt();
-					System.out.println("Modifica apportata. I gol SUBITI in CASA da " + squadra.getNomeSquadra() +" sono ora " + squadra.setGolSubitiCasa(quantitaModifica) + ".\n");
-					break;
-				case "2-2":
-					System.out.println("I gol SUBITI in TRASFERTA da " + squadra.getNomeSquadra() +" sono " + squadra.getGolSubitiTrasferta() + ".\n"
-							+ "Quanti gol vuoi aggiungere/togliere? (scrivi il numero senza il simbolo -)");
-					quantitaModifica= scanner.nextInt();
-					System.out.println("Modifica apportata. I gol SUBITI in TRASFERTA da " + squadra.getNomeSquadra() +" sono ora " + squadra.setGolSubitiTrasferta(quantitaModifica) + ".\n");
-					break;
-			}
+		} while (casaOTrasferta!=1 && casaOTrasferta!=2);
+		
+		switch (fattiOSubiti + "-" + casaOTrasferta) {
+			case "1-1":
+				System.out.println("I gol FATTI in CASA da " + squadra.getNomeSquadra() +" sono " + squadra.getGolFattiCasa() + ".\n"
+						+ "Quanti gol vuoi aggiungere/togliere? (scrivi il numero senza il simbolo -)");
+				quantitaModifica= scanner.nextInt();
+				System.out.println("Modifica apportata. I gol FATTI in CASA da " + squadra.getNomeSquadra() +" sono ora " + squadra.setGolFattiCasa(quantitaModifica) + ".\n");
+				break;
+				
+			case "1-2":
+				System.out.println("I gol FATTI in TRASFERTA da " + squadra.getNomeSquadra() +" sono " + squadra.getGolFattiTrasferta() + ".\n"
+						+ "Quanti gol vuoi aggiungere/togliere? (scrivi il numero senza il simbolo -)");
+				quantitaModifica= scanner.nextInt();
+				System.out.println("Modifica apportata. I gol FATTI in TRASFERTA da " + squadra.getNomeSquadra() +" sono ora " + squadra.setGolFattiTrasferta(quantitaModifica) + ".\n");
+				break;
+			case "2-1":
+				System.out.println("I gol SUBITI in CASA da " + squadra.getNomeSquadra() +" sono " + squadra.getGolSubitiCasa() + ".\n"
+						+ "Quanti gol vuoi aggiungere/togliere? (scrivi il numero senza il simbolo -)");
+				quantitaModifica= scanner.nextInt();
+				System.out.println("Modifica apportata. I gol SUBITI in CASA da " + squadra.getNomeSquadra() +" sono ora " + squadra.setGolSubitiCasa(quantitaModifica) + ".\n");
+				break;
+			case "2-2":
+				System.out.println("I gol SUBITI in TRASFERTA da " + squadra.getNomeSquadra() +" sono " + squadra.getGolSubitiTrasferta() + ".\n"
+						+ "Quanti gol vuoi aggiungere/togliere? (scrivi il numero senza il simbolo -)");
+				quantitaModifica= scanner.nextInt();
+				System.out.println("Modifica apportata. I gol SUBITI in TRASFERTA da " + squadra.getNomeSquadra() +" sono ora " + squadra.setGolSubitiTrasferta(quantitaModifica) + ".\n");
+				break;
 		}
 	}
 
 	public static void VisualizzaPunti(ArrayList <Squadra> elencoSquadre, Scanner scanner) {
-		System.out.println("Scrivi il nome della Squadra di cui vuoi visualizzare i punti:\n");
-		String nomeSquadra = scanner.nextLine();
-		Squadra squadra = TrovaSquadra(nomeSquadra, elencoSquadre);
-		if (nomeSquadra.equalsIgnoreCase(squadra.getNomeSquadra())) {
-			System.out.println("I punti totalizzati da " + squadra.getNomeSquadra() + "sono " + squadra.getPunti()+".\n"
+		Squadra squadra;
+		do{
+			System.out.println("Scrivi il nome della Squadra di cui vuoi visualizzare i punti:\n");
+			String nomeSquadra = scanner.nextLine();
+			if(nomeSquadra.equalsIgnoreCase("menu")) {
+				return;
+			}
+			squadra = TrovaSquadra(nomeSquadra, elencoSquadre);
+			if (squadra==null) {
+				System.out.println("Nessuna squadra trovata.");
+			}
+		} while (squadra==null);
+		
+		System.out.println("I punti totalizzati da " + squadra.getNomeSquadra() + " sono " + squadra.getPunti()+".\n"
 					+ "La media inglese e' " + squadra.getMediaInglese());
-		}
-		else {
-			System.out.println("Squadra non trovata");
-		}
 	}
 	
 	
 	public static void VisualizzaDettagli(ArrayList <Squadra> elencoSquadre, Scanner scanner) {
-		System.out.println("Scrivi il nome della Squadra di cui vuoi visualizzare i dettagli:\n");
-		String nomeSquadra = scanner.nextLine();
-		Squadra squadra = TrovaSquadra(nomeSquadra, elencoSquadre);
-		if (nomeSquadra.equalsIgnoreCase(squadra.getNomeSquadra())) {
-			System.out.println("Ecco i dettagli di " + nomeSquadra + ":\n"
-					+ "Partite Vinte: " + squadra.getPartiteVinte() + " di cui " + squadra.getPartiteVinteCasa() + " in Casa e " + squadra.getPartiteVinteTrasferta() + " in Trasferta\n"
-					+ "Partite Pareggiate: " + squadra.getPartitePareggiate() + " di cui " + squadra.getPartitePareggiateCasa() + " in Casa e " + squadra.getPartitePareggiateTrasferta() + " in Trasferta\n"
-					+ "Partite Perse: " + squadra.getPartitePerse() + " di cui " + squadra.getPartitePerseCasa() + " in Casa e " + squadra.getPartitePerseTrasferta() + " in Trasferta\n"
-					+ "Totale Partite Giocate: " + squadra.getTotPartite() + " di cui " + squadra.getTotPartiteCasa() + " in Casa e " + squadra.getTotPartiteTrasferta() + " in Trasferta\n"
-					+ "Gol Fatti: " + squadra.getGolFatti() + " di cui " + squadra.getGolFattiCasa() + " in Casa e " + squadra.getGolFattiTrasferta() + " in Trasferta\n"
-					+ "Gol Subiti: " + squadra.getGolSubiti() + " di cui " + squadra.getGolSubitiCasa() + " in Casa e " + squadra.getGolSubitiTrasferta() + " in Trasferta\n"
-					+ "Differenza Gol Fatti - Gol Subiti: " + squadra.getDifferenzaGol() + "\n"
-					+ "Punti: " + squadra.getPunti() + "\n"
-					+ "Media Inglese: " + squadra.getMediaInglese() + "\n");	
-		}
-		else {
-			System.out.println("Squadra non trovata");
-		}
+		Squadra squadra;
+		String nomeSquadra;
+		do{
+			System.out.println("Scrivi il nome della Squadra di cui vuoi visualizzare i dettagli:\n");
+			nomeSquadra = scanner.nextLine();
+			if(nomeSquadra.equalsIgnoreCase("menu")) {
+				return;
+			}
+			squadra = TrovaSquadra(nomeSquadra, elencoSquadre);
+			if (squadra==null) {
+				System.out.println("Nessuna squadra trovata.");
+			}
+		} while (squadra==null);
+		
+		System.out.println("Ecco i dettagli di " + nomeSquadra + ":\n"
+				+ "Partite Vinte: " + squadra.getPartiteVinte() + " di cui " + squadra.getPartiteVinteCasa() + " in Casa e " + squadra.getPartiteVinteTrasferta() + " in Trasferta\n"
+				+ "Partite Pareggiate: " + squadra.getPartitePareggiate() + " di cui " + squadra.getPartitePareggiateCasa() + " in Casa e " + squadra.getPartitePareggiateTrasferta() + " in Trasferta\n"
+				+ "Partite Perse: " + squadra.getPartitePerse() + " di cui " + squadra.getPartitePerseCasa() + " in Casa e " + squadra.getPartitePerseTrasferta() + " in Trasferta\n"
+				+ "Totale Partite Giocate: " + squadra.getTotPartite() + " di cui " + squadra.getTotPartiteCasa() + " in Casa e " + squadra.getTotPartiteTrasferta() + " in Trasferta\n"
+				+ "Gol Fatti: " + squadra.getGolFatti() + " di cui " + squadra.getGolFattiCasa() + " in Casa e " + squadra.getGolFattiTrasferta() + " in Trasferta\n"
+				+ "Gol Subiti: " + squadra.getGolSubiti() + " di cui " + squadra.getGolSubitiCasa() + " in Casa e " + squadra.getGolSubitiTrasferta() + " in Trasferta\n"
+				+ "Differenza Gol Fatti - Gol Subiti: " + squadra.getDifferenzaGol() + "\n"
+				+ "Punti: " + squadra.getPunti() + "\n"
+				+ "Media Inglese: " + squadra.getMediaInglese() + "\n");	
 	}
 	
 	public static void Classifica(ArrayList<Squadra>elencoSquadre, Scanner scanner) {
@@ -353,20 +372,20 @@ public class Main {
 					break;
 			}
 						
-		} while (scelta!=1 && scelta!=2);
+		} while (scelta<1 || scelta>3);
 	}
 	
 	public static void ClassificaNormale(ArrayList<Squadra>elencoSquadre, Scanner scanner) {
 		ArrayList<Integer> listaPunti = new ArrayList<>();
 		ArrayList<Squadra> classifica = new ArrayList<>();
 		ArrayList<Boolean> daAggiungere = new ArrayList<>();
-		int maxPunti=0;
+		int maxPunti=-1000000;
 		for(Squadra i:elencoSquadre) {
 			listaPunti.add(i.getPunti());
 		}
 		
 		for(int i=0; i<listaPunti.size(); i++) {
-			daAggiungere.set(i, true);
+			daAggiungere.add(true);
 		}
 		
 		for(int i=0; i<listaPunti.size(); i++) {
@@ -382,16 +401,19 @@ public class Main {
 					classifica.add(elencoSquadre.get(b));
 					listaPunti.set(b, -100);
 					daAggiungere.set(b, false);
+					maxPunti=-10000000;
 				}			
 				
 			}
 		}
-		
+		System.out.println("CLASSIFICA SECONDO PUNTEGGIO NORMALE:\n\n");
+
 		for(int i=0; i < classifica.size(); i++) {
-			System.out.println("CLASSIFICA SECONDO PUNTEGGIO NORMALE:\n"
-					+ (i+1) + " - "+ classifica.get(i).getNomeSquadra() + " ----- PUNTI: " +  classifica.get(i).getPunti() + " - PARTITE VINTE: " + classifica.get(i).getPartiteVinte() + " - PARTITE PAREGGIATE: " + classifica.get(i).getPartitePareggiate()
+			System.out.println((i+1) + " - "+ classifica.get(i).getNomeSquadra() + " ----- PUNTI: " +  classifica.get(i).getPunti() + " - PARTITE VINTE: " + classifica.get(i).getPartiteVinte() + " - PARTITE PAREGGIATE: " + classifica.get(i).getPartitePareggiate()
 					+ " - PARTITE PERSE: " + classifica.get(i).getPartitePerse());
 		}
+		System.out.println("\n\n");
+		return;
 		
 	}
 	
@@ -399,13 +421,13 @@ public class Main {
 		ArrayList<Integer> listaMediaInglese = new ArrayList<>();
 		ArrayList<Squadra> classifica = new ArrayList<>();
 		ArrayList<Boolean> daAggiungere = new ArrayList<>();
-		int maxMediaInglese=0;
+		int maxMediaInglese=-1000000;
 		for(Squadra i:elencoSquadre) {
 			listaMediaInglese.add(i.getMediaInglese());
 		}
 		
 		for(int i=0; i<listaMediaInglese.size(); i++) {
-			daAggiungere.set(i, true);
+			daAggiungere.add(true);
 		}
 		
 		for(int i=0; i<listaMediaInglese.size(); i++) {
@@ -419,18 +441,21 @@ public class Main {
 			for(int b=0; b<listaMediaInglese.size(); b++) {
 				if(listaMediaInglese.get(b) == maxMediaInglese && daAggiungere.get(b)==true) {
 					classifica.add(elencoSquadre.get(b));
-					listaMediaInglese.set(b, -100);
+					listaMediaInglese.set(b, -10000);
 					daAggiungere.set(b, false);
+					maxMediaInglese=-10000000;
 				}			
 				
 			}
 		}
-		
+		System.out.println("CLASSIFICA SECONDO MEDIA INGLESE:\n\n");
 		for(int i=0; i < classifica.size(); i++) {
-			System.out.println("CLASSIFICA SECONDO MEDIA INGLESE:\n"
+			System.out.println(""
 					+ (i+1) + " - "+ classifica.get(i).getNomeSquadra() + " ----- PUNTI (SECONDO MEDIA INGLESE): " +  classifica.get(i).getMediaInglese() + " - PARTITE VINTE: " + classifica.get(i).getPartiteVinte() + " - PARTITE PAREGGIATE: " + classifica.get(i).getPartitePareggiate()
 					+ " - PARTITE PERSE: " + classifica.get(i).getPartitePerse());
 		}
+		System.out.println("\n\n");
+		return;
 	}
 	
 	
@@ -455,7 +480,7 @@ public class Main {
 				System.out.println("Input non corretto!");
 			}
 		
-	     }while(true);
+	     }while(!scelta.equalsIgnoreCase("si") || !scelta.equalsIgnoreCase("sì") || !scelta.equalsIgnoreCase("no"));
 
 	}
 }
