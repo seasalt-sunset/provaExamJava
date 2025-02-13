@@ -12,6 +12,9 @@ public class Scansione {
 		 _scanner.close();
 	}
 	
+	
+	//INSERIMENTO SQUADRA
+	
 	MainMenu sceltaMainMenu() {
 		apriScanner();
 		Print.mainMenu();
@@ -121,5 +124,56 @@ public class Scansione {
 		return golSubitiTrasferta;
 	}
 	
+	
+	//MODIFICA PARTITE
+	
+	String modPartite_nomeSquadra() {
+		apriScanner();
+		Print.printNomeSquadra_modPartite();
+		String nomeSquadra = _scanner.nextLine();
+		chiudiScanner();
+		
+		return nomeSquadra;
+	}
+	
+	CasaOTrasferta modPartite_casaOTrasferta() {
+		apriScanner();
+		int input;
+		while(true) {
+			Print.printModPartite_casaOTrasferta();
+		input = _scanner.nextInt();
+		if(input>=1 && input<=3) {
+			break;
+			}
+		Print.inputErrato();
+		}
+		CasaOTrasferta casaOTrasferta = CasaOTrasferta.values()[input];
+		chiudiScanner();
+		
+		return casaOTrasferta;
+	}
+	
+	VinteOPerse modPartite_vinteOPerse(){
+		apriScanner();
+		int input;
+		
+		while(true) {
+		System.out.println("Scegli tra le varie opzioni. Digita:\n"
+				+ "1)Se vuoi cambiare il valore delle partite VINTE\n"
+				+ "2)Se vuoi cambiare il valore delle partite PERSE\n"
+				+ "3)se vuoi cambiare il valore delle partite PAREGGIATE\n"
+				+ "4)se vuoi cambiarle TUTTE\n");
+		input = _scanner.nextInt();
+		if(input>=1 && input<=4) {
+			break;
+			}
+		Print.inputErrato();
+		}
+		
+		chiudiScanner();
+		VinteOPerse vinteOPerse = VinteOPerse.values()[input];
+
+		return vinteOPerse;
+	}
 	
 }

@@ -1,5 +1,6 @@
 package provaEsame2;
 import java.lang.String;
+import java.util.HashMap;
 import java.util.ArrayList;
 public class Main {
 	
@@ -8,27 +9,37 @@ public class Main {
 	public static void main(String[] args) {
 		MainMenu sceltaMenu;
 		ArrayList <Squadra> listaSquadre = new ArrayList <>();
+		ArrayList <Partite> listaPartite = new ArrayList <>();
+		ArrayList <Gol> listaGol = new ArrayList <>();
 		
 		System.out.println("Benvenuto in questo programma elettronico digitale!!!!!\n");
-		Squadra squadra = SquadraDAO.AggiungiSquadra();
+		Squadra squadra = SquadraDAO.aggiungiSquadra();
+		Partite partite = PartiteDAO.aggiungiPartiteSquadra(squadra);
+		Gol gol = GolDAO.aggiungiGolSquadra(squadra);
 		listaSquadre.add(squadra);
+		listaPartite.add(partite);
+		listaGol.add(gol);
 		Print.SquadraAggiunta();
 		
 		do {
 			sceltaMenu = _scansione.sceltaMainMenu();
 			
 			switch(sceltaMenu) {
-			case MainMenu.CreaSquadra:
-				Squadra squadra = SquadraDAO.AggiungiSquadra();
+			case MainMenu.CreaNuovaSquadra:
+				squadra = SquadraDAO.aggiungiSquadra();
+				Partite partite = PartiteDAO.aggiungiPartiteSquadra(squadra);
+				Gol gol = GolDAO.aggiungiGolSquadra(squadra);
 				listaSquadre.add(squadra);
+				listaPartite.add(partite);
+				listaGol.add(gol);
 				Print.SquadraAggiunta();
 				break;
 				
 			case MainMenu.ModificaPartite:
-				ModificaPartite(listaSquadre, scanner);
+				PartiteDAO.modificaPartite(listaPartite);
 				break;
 				
-			case MainMenu.ModificalGol:
+			case MainMenu.ModificaGol:
 				ModificaGol(listaSquadre, scanner);
 				break;
 				
@@ -60,156 +71,7 @@ public class Main {
 			
 		} while(sceltaMenu!=MainMenu.Esci);
 	}
-		
-		
-	
-	public static Squadra TrovaSquadra(String nome, ArrayList <Squadra> elencoSquadre) {
-		for(int i=0; i<elencoSquadre.size(); i++) {
-			if(elencoSquadre.get(i).getNomeSquadra().equalsIgnoreCase(nome)) {
-				return elencoSquadre.get(i);
-			}
-		}
-		return null;
-	}
-	
-	
-	
-	public static void ModificaPartite(ArrayList <Squadra> elencoSquadre, Scanner scanner) {
-		boolean casa, trasferta;
-		casa=false; trasferta=false;
-		int casaOTrasferta, vinteOPerse;
-		Squadra squadra;
-		do {
-			System.out.println("Scrivi il nome della Squadra di cui vuoi modificare le partite.\nScrivi 'menu' per tornare al menu principale\n");
-			String nomeSquadra = scanner.nextLine();
-			if(nomeSquadra.equalsIgnoreCase("menu")) {
-				return;
-			}
-			squadra = TrovaSquadra(nomeSquadra, elencoSquadre);
-			if (squadra==null) {
-				System.out.println("Nessuna squadra trovata.");
-			}
-		} while (squadra==null);
-		
-		do {
-			System.out.println("Vuoi cambiare il valore delle partite giocate in CASA (digita 1), in TRASFERTA (digita 2) o ENTRAMBE (digita 3)?\n");
-			casaOTrasferta = scanner.nextInt();
-			switch(casaOTrasferta) {
-			case 1: 
-				casa=true;
-				break;
-			case 2:
-				trasferta=true;
-				break;
-			case 3:
-				casa=true;
-				trasferta=true;
-				break;
-			default:
-				System.out.println("Valore inserito non corretto.");
-				break;
-			}
-		} while(casaOTrasferta<1 && casaOTrasferta>3);
-		do {
-			System.out.println("Scegli tra le varie opzioni. Digita:\n"
-					+ "1)Se vuoi cambiare il valore delle partite VINTE\n"
-					+ "2)Se vuoi cambiare il valore delle partite PERSE\n"
-					+ "3)se vuoi cambiare il valore delle partite PAREGGIATE\n"
-					+ "4)se vuoi cambiarle TUTTE\n");
-			vinteOPerse = scanner.nextInt();
-			if (vinteOPerse<1 || vinteOPerse>4) {
-					System.out.println("Valore inserito non corretto.");
-			}
-			} while (vinteOPerse<1 && vinteOPerse>4); 
-		
-		switch (vinteOPerse) {
-			case 1:
-					if (casa==true) {
-						ModificaPartiteVinteCasa(squadra, scanner);
-					}
-					if (trasferta==true) {
-						ModificaPartiteVinteTrasferta(squadra, scanner);
-					}
-				break;
-			case 2:
-				if (casa==true) {
-					ModificaPartitePerseCasa(squadra, scanner);
-				}
-				if (trasferta==true) {
-					ModificaPartitePerseTrasferta(squadra, scanner);
-				}
-				break;
-			case 3:
-				if (casa==true) {
-					ModificaPartitePareggiateCasa(squadra, scanner);
-				}
-				if (trasferta==true) {
-					ModificaPartitePareggiateTrasferta(squadra, scanner);
-				}
-				break;
-			case 4:
-				if (casa==true) {
-					ModificaPartiteVinteCasa(squadra, scanner);
-					ModificaPartitePerseCasa(squadra, scanner);
-					ModificaPartitePareggiateCasa(squadra, scanner);
-				}
-				if (trasferta==true) {
-					ModificaPartiteVinteTrasferta(squadra, scanner);
-					ModificaPartitePerseTrasferta(squadra, scanner);
-					ModificaPartitePareggiateTrasferta(squadra, scanner);
-				}
-				break;
-		}
-	}
-	
-	
-	
-	public static void ModificaPartiteVinteCasa(Squadra squadra, Scanner scanner) {
-		System.out.println("Il valore delle partite VINTE giocate in CASA da " +squadra.getNomeSquadra() + " e' " +squadra.getPartiteVinteCasa() + ".\n"
-				+ "Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
-		int quantitaModifica = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Il valore delle partite VINTE giocate in CASA da " +squadra.getNomeSquadra() + " e' ora " +squadra.setPartiteVinteCasa(quantitaModifica) +".\n");
-	}
-	public static void ModificaPartitePerseCasa(Squadra squadra, Scanner scanner) {
-		System.out.println("Il valore delle partite PERSE giocate in CASA da " +squadra.getNomeSquadra() + " e' " +squadra.getPartitePerseCasa() + ".\n"
-				+ "Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
-		int quantitaModifica = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Il valore delle partite PERSE giocate in CASA da " +squadra.getNomeSquadra() + " e' ora " +squadra.setPartitePerseCasa(quantitaModifica) +".\n");
-		
-	}
-	public static void ModificaPartitePareggiateCasa(Squadra squadra, Scanner scanner) {
-		System.out.println("Il valore delle partite PAREGGIATE giocate in CASA da " +squadra.getNomeSquadra() + " e' " +squadra.getPartitePareggiateCasa() + ".\n"
-			+ "Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
-		int quantitaModifica = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Il valore delle partite PAREGGIATE giocate in CASA da " +squadra.getNomeSquadra() + " e' ora " +squadra.setPartitePareggiateCasa(quantitaModifica) +".\n");
 
-	}
-	public static void ModificaPartiteVinteTrasferta(Squadra squadra, Scanner scanner) {
-		System.out.println("Il valore delle partite VINTE giocate in TRASFERTA da " +squadra.getNomeSquadra() + " e' " +squadra.getPartiteVinteTrasferta() +".\n"
-				+ "Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
-		int quantitaModifica = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Il valore delle partite VINTE giocate in TRASFERTA da " +squadra.getNomeSquadra() + " e' ora " +squadra.setPartiteVinteTrasferta(quantitaModifica) +".\n");
-		
-	}
-	public static void ModificaPartitePerseTrasferta(Squadra squadra, Scanner scanner) {
-		System.out.println("Il valore delle partite PERSE giocate in TRASFERTA da " +squadra.getNomeSquadra() + " e' " +squadra.getPartitePerseTrasferta() +".\n"
-				+ "Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
-		int quantitaModifica = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Il valore delle partite PERSE giocate in TRASFERTA da " +squadra.getNomeSquadra() + " e' ora " +squadra.setPartitePerseTrasferta(quantitaModifica) +".\n");
-	}
-	public static void ModificaPartitePareggiateTrasferta(Squadra squadra, Scanner scanner) {
-		System.out.println("Il valore delle partite PAREGGIATE giocate in TRASFERTA da " +squadra.getNomeSquadra() + " e' " +squadra.getPartitePareggiateTrasferta() +".\n"
-				+ "Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
-		int quantitaModifica = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Il valore delle partite PAREGGIATE giocate in TRASFERTA da " +squadra.getNomeSquadra() + " e' ora " +squadra.setPartitePareggiateTrasferta(quantitaModifica) +".\n");
-	}
-	
 	
 	public static void ModificaGol(ArrayList <Squadra> elencoSquadre, Scanner scanner) {
 		int fattiOSubiti, casaOTrasferta, quantitaModifica;

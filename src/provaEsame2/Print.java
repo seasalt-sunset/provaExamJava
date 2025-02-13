@@ -27,6 +27,10 @@ public class Print {
 				+ "0) Esci");
 	}
 	
+	static void inputErrato() {
+		System.out.println("Valore inserito non corretto.");
+	}
+	
 	static void printInserimentoNomeSquadra() {
 		System.out.println("Inserisci il nome della squadra da aggiungere:\n");
 	}
@@ -36,5 +40,13 @@ public class Print {
 
 	static void SquadraAggiunta() {
 		System.out.println("Squadra aggiunta!");
+	}
+	
+	static void printNomeSquadra_modPartite() {
+		System.out.println("Scrivi il nome della Squadra di cui vuoi modificare le partite.\nScrivi 'menu' per tornare al menu principale\n");
+	}
+	
+	static void printModPartite_casaOTrasferta() {
+		System.out.println("Vuoi cambiare il valore delle partite giocate in CASA (digita 1), in TRASFERTA (digita 2) o ENTRAMBE (digita 3)?\n");
 	}
 }
