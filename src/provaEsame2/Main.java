@@ -1,63 +1,64 @@
 package provaEsame2;
-import java.util.Scanner;
 import java.lang.String;
 import java.util.ArrayList;
 public class Main {
+	
+	private static Scansione _scansione = new Scansione();
 
 	public static void main(String[] args) {
-		int sceltaMenu;
+		MainMenu sceltaMenu;
 		ArrayList <Squadra> listaSquadre = new ArrayList <>();
-		Scanner scanner = new Scanner (System.in);
 		
 		System.out.println("Benvenuto in questo programma elettronico digitale!!!!!\n");
-		AggiungiSquadra(listaSquadre, scanner);
+		Squadra squadra = SquadraDAO.AggiungiSquadra();
+		listaSquadre.add(squadra);
+		Print.SquadraAggiunta();
 		
 		do {
-			System.out.println("MENU DI CAMPIONAPP!!! FORZA BARI E ALCUNE SQUADRE?! SCEGLI TRA LE VARIE OPZIONI:\n"
-					+ "1) Crea Nuova Squadra\n"
-					+ "2)Modifica partite di una Squadra\n"
-					+ "3)Modifica gol di una Squadra\n"
-					+ "4)Visualizza punteggio di una Squadra\n"
-					+ "5)Visualizza dettagli Squadra\n"
-					+ "6)Visualizza Classifica\n"
-					+ "7) Azzera Punteggio Squadre e inizia nuova stagione\n"
-					+ "0) Esci");
-			sceltaMenu= scanner.nextInt();
-			scanner.nextLine();
+			sceltaMenu = _scansione.sceltaMainMenu();
 			
 			switch(sceltaMenu) {
-			case 1:
-				AggiungiSquadra(listaSquadre, scanner);
+			case MainMenu.CreaSquadra:
+				Squadra squadra = SquadraDAO.AggiungiSquadra();
+				listaSquadre.add(squadra);
+				Print.SquadraAggiunta();
 				break;
-			case 2:
-				ModificaPartite(listaSquadre, scanner);
-			break;
 				
-			case 3:
+			case MainMenu.ModificaPartite:
+				ModificaPartite(listaSquadre, scanner);
+				break;
+				
+			case MainMenu.ModificalGol:
 				ModificaGol(listaSquadre, scanner);
 				break;
-			case 4:
+				
+			case MainMenu.PunteggioSquadra:
 				VisualizzaPunti(listaSquadre, scanner);
 				break;
-			case 5:
+				
+			case MainMenu.DettagliSquadra:
 				VisualizzaDettagli(listaSquadre, scanner);
 				break;
-			case 6:
+				
+			case MainMenu.Classifica:
 				Classifica(listaSquadre, scanner);
 				break;
-			case 7:
+				
+			case MainMenu.Azzera:
 				AzzeraPunteggio(listaSquadre, scanner);
 				break;
-			case 0:
+				
+			case MainMenu.Esci:
 				System.out.println("Uscita in corso...");
 				break;
+				
 			default:
 				System.out.println("Input non corretto!!! Riprova!!!");
 				break;
+				
 			}
 			
-		} while(sceltaMenu!=0);
-		scanner.close();
+		} while(sceltaMenu!=MainMenu.Esci);
 	}
 		
 		
@@ -71,35 +72,6 @@ public class Main {
 		return null;
 	}
 	
-	public static void AggiungiSquadra(ArrayList <Squadra> elencoSquadre, Scanner scanner) {
-		System.out.println("Inserisci il nome della squadra da aggiungere:\n");
-		String nomeSquadra = scanner.nextLine();
-		System.out.println("Inserisci il numero di partite VINTE in CASA:\n");
-		int pVinteCasa = scanner.nextInt();
-		System.out.println("Inserisci il numero di partite VINTE in TRASFERTA:\n");
-		int pVinteTrasferta = scanner.nextInt();
-		System.out.println("Inserisci il numero di partite PAREGGIATE in CASA:\n");
-		int pPareggiateCasa = scanner.nextInt();
-		System.out.println("Inserisci il numero di partite PAREGGIATE in TRASFERTA:\n");
-		int pPareggiateTrasferta = scanner.nextInt();
-		System.out.println("Inserisci il numero di partite PERSE in CASA:\n");
-		int pPerseCasa = scanner.nextInt();
-		System.out.println("Inserisci il numero di partite PERSE in TRASFERTA:\n");
-		int pPerseTrasferta = scanner.nextInt();
-		System.out.println("Inserisci il numero di GOL FATTI in CASA:\n");
-		int golFattiCasa = scanner.nextInt();
-		System.out.println("Inserisci il numero di GOL FATTI in TRASFERTA:\n");
-		int golFattiTrasferta = scanner.nextInt();
-		System.out.println("Inserisci il numero di GOL SUBITI in CASA:\n");
-		int golSubitiCasa = scanner.nextInt();
-		System.out.println("Inserisci il numero di GOL SUBITI in TRASFERTA:\n");
-		int golSubitiTrasferta = scanner.nextInt();
-		scanner.nextLine();
-		Squadra aggSquadra = new Squadra(nomeSquadra, pVinteCasa, pVinteTrasferta, pPareggiateCasa, pPareggiateTrasferta, pPerseCasa, 
-				pPerseTrasferta, golFattiCasa, golSubitiCasa, golFattiTrasferta, golSubitiTrasferta);
-		elencoSquadre.add(aggSquadra);
-		System.out.println("Squadra aggiunta!");
-	}
 	
 	
 	public static void ModificaPartite(ArrayList <Squadra> elencoSquadre, Scanner scanner) {
@@ -375,7 +347,7 @@ public class Main {
 		} while (scelta<1 || scelta>3);
 	}
 	
-	public static void ClassificaNormale(ArrayList<Squadra>elencoSquadre, Scanner scanner) {
+	public static void ClassificaNormale(ArrayList<Squadra> elencoSquadre, Scanner scanner) {
 		ArrayList<Integer> listaPunti = new ArrayList<>();
 		ArrayList<Squadra> classifica = new ArrayList<>();
 		ArrayList<Boolean> daAggiungere = new ArrayList<>();
@@ -383,20 +355,22 @@ public class Main {
 		for(Squadra i:elencoSquadre) {
 			listaPunti.add(i.getPunti());
 		}
-		
+
 		for(int i=0; i<listaPunti.size(); i++) {
 			daAggiungere.add(true);
 		}
 		
-		for(int i=0; i<listaPunti.size(); i++) {
+		int size = listaPunti.size();
+		
+		for(int i=0; i<size; i++) {
 			
-			for(int a=0; a<listaPunti.size(); a++) {
+			for(int a=0; a<size; a++) {
 				if(listaPunti.get(a)>maxPunti) {
 					maxPunti= listaPunti.get(a);
 				}
 			}
 			
-			for(int b=0; b<listaPunti.size(); b++) {
+			for(int b=0; b<size; b++) {
 				if(listaPunti.get(b) == maxPunti && daAggiungere.get(b)==true) {
 					classifica.add(elencoSquadre.get(b));
 					listaPunti.set(b, -100);
