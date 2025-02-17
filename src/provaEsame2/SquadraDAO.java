@@ -16,15 +16,6 @@ public class SquadraDAO {
 		return aggSquadra;
 	}
 	
-	public static Squadra trovaSquadra(String nome, ArrayList <Squadra> elencoSquadre) {
-		for(int i=0; i<elencoSquadre.size(); i++) {
-			if(elencoSquadre.get(i).getNomeSquadra().equalsIgnoreCase(nome)) {
-				return elencoSquadre.get(i);
-			}
-		}
-		return null;
-	}
-	
 	public static int trovaIndexSquadra(String nome, ArrayList <Squadra> elencoSquadre) {
 		for(int i=0; i<elencoSquadre.size(); i++) {
 			if(elencoSquadre.get(i).getNomeSquadra().equalsIgnoreCase(nome)) {

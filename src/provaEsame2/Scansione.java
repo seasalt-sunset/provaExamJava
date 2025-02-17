@@ -142,11 +142,11 @@ public class Scansione {
 		int input;
 		while(true) {
 			Print.printModPartite_casaOTrasferta();
-		input = _scanner.nextInt();
-		if(input>=1 && input<=3) {
-			break;
-			}
-		Print.inputErrato();
+			input = _scanner.nextInt();
+			if(input>=1 && input<=3) {
+				break;
+				}
+			Print.inputErrato();
 		}
 		CasaOTrasferta casaOTrasferta = CasaOTrasferta.values()[input];
 		chiudiScanner();
@@ -159,16 +159,12 @@ public class Scansione {
 		int input;
 		
 		while(true) {
-		System.out.println("Scegli tra le varie opzioni. Digita:\n"
-				+ "1)Se vuoi cambiare il valore delle partite VINTE\n"
-				+ "2)Se vuoi cambiare il valore delle partite PERSE\n"
-				+ "3)se vuoi cambiare il valore delle partite PAREGGIATE\n"
-				+ "4)se vuoi cambiarle TUTTE\n");
-		input = _scanner.nextInt();
-		if(input>=1 && input<=4) {
-			break;
-			}
-		Print.inputErrato();
+			Print.printModPartite_vinteOPerse();
+			input = _scanner.nextInt();
+			if(input>=1 && input<=4) {
+				break;
+				}
+			Print.inputErrato();
 		}
 		
 		chiudiScanner();
@@ -177,13 +173,54 @@ public class Scansione {
 		return vinteOPerse;
 	}
 	
-	int modPartite_quantitaModifica() {
+	int quantitaModifica() {
 		apriScanner();
-		int quantitaModifica = _scanner.nextInt();
-		Print.printModPartite_valorePartite(vinteOPerse, casaOTrasferta, partite, true);
+		int quantitaModifica = _scanner.nextInt();   
 		chiudiScanner();
 		
 		return quantitaModifica;
 	}
 	
+	String modGol_nomeSquadra() {
+		apriScanner();
+		Print.printNomeSquadra_modGol();
+		String nomeSquadra = _scanner.nextLine();	
+		chiudiScanner();
+		
+		return nomeSquadra;
+	}
+	
+	FattiOSubiti modGol_fattiOSubiti() {
+		apriScanner();
+		int input;
+		while(true) {
+			Print.printModGol_fattiOSubiti();
+			input = _scanner.nextInt();
+			if(input>=1 && input<=3) {
+				break;
+				}
+			Print.inputErrato();
+		}
+		FattiOSubiti fattiOSubiti = FattiOSubiti.values()[input];
+		chiudiScanner();
+		
+		return fattiOSubiti;
+	}
+	
+	CasaOTrasferta modGol_casaOTrasferta() {
+		apriScanner();
+		int input;
+		while(true) {
+			Print.printModGol_casaOTrasferta();
+			input = _scanner.nextInt();
+			if(input>=1 && input<=3) {
+				break;
+			}
+			Print.inputErrato();
+		}
+		CasaOTrasferta casaOTrasferta = CasaOTrasferta.values()[input];
+		chiudiScanner();
+		
+		return casaOTrasferta;
+	}
 }

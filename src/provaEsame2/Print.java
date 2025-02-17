@@ -47,18 +47,60 @@ public class Print {
 	}
 	
 	static void printModPartite_casaOTrasferta() {
-		System.out.println("Vuoi cambiare il valore delle partite giocate in CASA (digita 1), in TRASFERTA (digita 2) o ENTRAMBE (digita 3)?\n");
+		System.out.println("Digita:\n"
+				+ "1) Se vuoi modificare le partite giocate in CASA\n"
+				+ "2) Se vuoi modificare le partite giocate in TRASFERTA\n"
+				+ "3) Se vuoi modificare ENTRAMBE");
 	}
 	
-	static void printModPartite_valorePartite(VinteOPerse vinteOPerse, CasaOTrasferta casaOTrasferta, Partite partite, boolean modificaFatta) {
+	static void printModPartite_vinteOPerse() {
+		System.out.println("Scegli tra le varie opzioni. Digita:\n"
+				+ "1)Se vuoi cambiare il valore delle partite VINTE\n"
+				+ "2)Se vuoi cambiare il valore delle partite PERSE\n"
+				+ "3)se vuoi cambiare il valore delle partite PAREGGIATE\n"
+				+ "4)se vuoi cambiarle TUTTE\n");
+	}
+	
+	static void printModPartite_valorePartite(VinteOPerse vinteOPerse, CasaOTrasferta casaOTrasferta, Partite partite, boolean modificaFatta, int getPartite) {
 		String modifica="";
 		if (modificaFatta=true) {
 			modifica.equals("ora ");
 		}
 		System.out.println("Il valore delle partite " + vinteOPerse.toString().toUpperCase() + " giocate in " + casaOTrasferta.toString().toUpperCase() + " da "
-				+ partite.getNomeSquadra() + " e' " + modifica + partite.getPartiteVinteCasa() + ".\n");
+				+ partite.getNomeSquadra() + " e' " + modifica + getPartite + ".\n");
 		if (modificaFatta=true) {
 			System.out.println("Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
 		}
 	}
+	
+	static void printNomeSquadra_modGol() {
+		System.out.println("Scrivi il nome della Squadra di cui vuoi modificare i gol.\nScrivi 'menu' per tornare al menu principale\n");
+	}
+	
+	static void printModGol_fattiOSubiti() {
+		System.out.println("Scegli tra le varie opzioni. Digita:\n"
+				+ "1) Se vuoi cambiare il valore dei gol FATTI\n"
+				+ "2) Se vuoi cambiare il valore dei gol SUBITI\n"
+				+ "3) Se vuoi cambiare il valore di ENTRAMBI");
+	}
+	
+	static void printModGol_casaOTrasferta() {
+		System.out.println("Digita:\n"
+				+ "1) Se vuoi cambiare il valore dei gol nelle partite giocate in CASA\n"
+				+ "2) Se vuoi cambiare il valore dei gol nelle partite giocate in TRASFERTA\n"
+				+ "3) Se vuoi cambiare il valore di ENTRAMBI");
+	}
+	
+	static void printModGol_valoreGol(FattiOSubiti fattiOSubiti, CasaOTrasferta casaOTrasferta, Gol gol, boolean modificaFatta, int getGol) {
+		String modifica="";
+		if (modificaFatta=true) {
+			modifica.equals("ora ");
+		}
+		System.out.println("Il valore dei gol " + fattiOSubiti.toString().toUpperCase() + " nelle partite giocate in " + casaOTrasferta.toString().toUpperCase() + " da "
+				+ gol.getNomeSquadra() + " e' " + modifica + getGol + ".\n");
+		if (modificaFatta=true) {
+			System.out.println("Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
+		}
+	}
+	
 }

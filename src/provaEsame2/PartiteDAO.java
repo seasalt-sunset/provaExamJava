@@ -22,7 +22,7 @@ public class PartiteDAO {
 		return aggPartiteSquadra;
 	}
 	
-	public static void ModificaPartite(ArrayList <Partite> elencoPartite, ArrayList <Squadra> elencoSquadre) {
+	public static void modificaPartite(ArrayList <Partite> elencoPartite, ArrayList <Squadra> elencoSquadre) {
 		CasaOTrasferta casaOTrasferta;
 		VinteOPerse vinteOPerse;
 		int indexSquadra;
@@ -37,8 +37,9 @@ public class PartiteDAO {
 				System.out.println("Nessuna squadra trovata.");
 			}
 		} while (indexSquadra==-1);
-			casaOTrasferta = _scansione.modPartite_casaOTrasferta();
-			vinteOPerse = _scansione.modPartite_vinteOPerse();
+			
+		casaOTrasferta = _scansione.modPartite_casaOTrasferta();
+		vinteOPerse = _scansione.modPartite_vinteOPerse();
 		
 		switch (vinteOPerse) {
 			case Vinte:
@@ -81,47 +82,46 @@ public class PartiteDAO {
 	}
 	
 	public static void ModificaPartiteVinteCasa(ArrayList<Partite> elencoPartite, int indexSquadra) {
-		
 		Partite modPartite= elencoPartite.get(indexSquadra);
-		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Casa, modPartite, false);
-		int quantitaModifica= _scansione.modPartite_quantitaModifica();
+		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Casa, modPartite, false, modPartite.getPartiteVinteCasa());
+		int quantitaModifica= _scansione.quantitaModifica();
 		modPartite.setPartiteVinteCasa(quantitaModifica);
-		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Casa, modPartite, true);
+		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Casa, modPartite, true, modPartite.getPartiteVinteCasa());
 	}
 	public static void ModificaPartitePerseCasa(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		Partite modPartite= elencoPartite.get(indexSquadra);
-		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Casa, modPartite, false);
-		int quantitaModifica= _scansione.modPartite_quantitaModifica();
+		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Casa, modPartite, false, modPartite.getPartitePerseCasa());
+		int quantitaModifica= _scansione.quantitaModifica();
 		modPartite.setPartitePerseCasa(quantitaModifica);
-		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Casa, modPartite, true);
+		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Casa, modPartite, true, modPartite.getPartitePerseCasa());
 	}
 	public static void ModificaPartitePareggiateCasa(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		Partite modPartite= elencoPartite.get(indexSquadra);
-		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Casa, modPartite, false);
-		int quantitaModifica= _scansione.modPartite_quantitaModifica();
+		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Casa, modPartite, false, modPartite.getPartitePareggiateCasa());
+		int quantitaModifica= _scansione.quantitaModifica();
 		modPartite.setPartitePerseCasa(quantitaModifica);
-		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Casa, modPartite, true);
+		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Casa, modPartite, true, modPartite.getPartitePareggiateCasa());
 	}
 	public static void ModificaPartiteVinteTrasferta(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		Partite modPartite= elencoPartite.get(indexSquadra);
-		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Trasferta, modPartite, false);
-		int quantitaModifica= _scansione.modPartite_quantitaModifica();
+		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Trasferta, modPartite, false, modPartite.getPartiteVinteTrasferta());
+		int quantitaModifica= _scansione.quantitaModifica();
 		modPartite.setPartitePerseCasa(quantitaModifica);
-		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Trasferta, modPartite, true);
+		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Trasferta, modPartite, true, modPartite.getPartiteVinteTrasferta());
 	}
 	public static void ModificaPartitePerseTrasferta(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		Partite modPartite= elencoPartite.get(indexSquadra);
-		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Trasferta, modPartite, false);
-		int quantitaModifica= _scansione.modPartite_quantitaModifica();
+		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Trasferta, modPartite, false, modPartite.getPartitePerseTrasferta());
+		int quantitaModifica= _scansione.quantitaModifica();
 		modPartite.setPartitePerseCasa(quantitaModifica);
-		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Trasferta, modPartite, true);
+		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Trasferta, modPartite, true, modPartite.getPartitePerseTrasferta());
 	}
 	public static void ModificaPartitePareggiateTrasferta(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		Partite modPartite= elencoPartite.get(indexSquadra);
-		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Trasferta, modPartite, false);
-		int quantitaModifica= _scansione.modPartite_quantitaModifica();
+		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Trasferta, modPartite, false, modPartite.getPartitePareggiateTrasferta());
+		int quantitaModifica= _scansione.quantitaModifica();
 		modPartite.setPartitePerseCasa(quantitaModifica);
-		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Trasferta, modPartite, true);
+		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Trasferta, modPartite, true, modPartite.getPartitePareggiateTrasferta());
 	}
 	
 }

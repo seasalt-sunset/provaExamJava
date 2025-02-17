@@ -27,8 +27,8 @@ public class Main {
 			switch(sceltaMenu) {
 			case MainMenu.CreaNuovaSquadra:
 				squadra = SquadraDAO.aggiungiSquadra();
-				Partite partite = PartiteDAO.aggiungiPartiteSquadra(squadra);
-				Gol gol = GolDAO.aggiungiGolSquadra(squadra);
+				partite = PartiteDAO.aggiungiPartiteSquadra(squadra);
+				gol = GolDAO.aggiungiGolSquadra(squadra);
 				listaSquadre.add(squadra);
 				listaPartite.add(partite);
 				listaGol.add(gol);
@@ -40,7 +40,7 @@ public class Main {
 				break;
 				
 			case MainMenu.ModificaGol:
-				ModificaGol(listaSquadre, scanner);
+				GolDAO.modificaGol(listaGol, listaSquadre);
 				break;
 				
 			case MainMenu.PunteggioSquadra:
@@ -72,71 +72,6 @@ public class Main {
 		} while(sceltaMenu!=MainMenu.Esci);
 	}
 
-	
-	public static void ModificaGol(ArrayList <Squadra> elencoSquadre, Scanner scanner) {
-		int fattiOSubiti, casaOTrasferta, quantitaModifica;
-		Squadra squadra;
-		do {
-			System.out.println("Scrivi il nome della Squadra di cui vuoi modificare i gol:\n");
-			String nomeSquadra = scanner.nextLine();
-			if(nomeSquadra.equalsIgnoreCase("menu")) {
-				return;
-			}
-			squadra = TrovaSquadra(nomeSquadra, elencoSquadre);
-			if (squadra==null) {
-				System.out.println("Nessuna squadra trovata.");
-			}
-		} while (squadra==null);
-		
-		do {
-			System.out.println("Scegli tra le varie opzioni. Digita:\n"
-				+ "1)Se vuoi cambiare il valore dei gol FATTI\n"
-				+ "2)Se vuoi cambiare il valore dei gol SUBITI\n");
-		fattiOSubiti= scanner.nextInt();
-		if(fattiOSubiti!=1 && fattiOSubiti!=2) {
-			System.out.println("Input errato!");
-		}
-		} while (fattiOSubiti!=1 && fattiOSubiti!=2);
-		
-		do {
-			System.out.println("Digita:\n"
-					+ "1) Se vuoi cambiare il valore dei gol nelle partite giocate in CASA\n"
-					+ "2) Se vuoi cambiare il valore dei gol nelle partite giocate in TRASFERTA\n");
-			casaOTrasferta= scanner.nextInt();
-			scanner.nextLine();
-			if(casaOTrasferta!=1 && casaOTrasferta!=2) {
-				System.out.println("Input errato!");
-			}
-		} while (casaOTrasferta!=1 && casaOTrasferta!=2);
-		
-		switch (fattiOSubiti + "-" + casaOTrasferta) {
-			case "1-1":
-				System.out.println("I gol FATTI in CASA da " + squadra.getNomeSquadra() +" sono " + squadra.getGolFattiCasa() + ".\n"
-						+ "Quanti gol vuoi aggiungere/togliere? (scrivi il numero senza il simbolo -)");
-				quantitaModifica= scanner.nextInt();
-				System.out.println("Modifica apportata. I gol FATTI in CASA da " + squadra.getNomeSquadra() +" sono ora " + squadra.setGolFattiCasa(quantitaModifica) + ".\n");
-				break;
-				
-			case "1-2":
-				System.out.println("I gol FATTI in TRASFERTA da " + squadra.getNomeSquadra() +" sono " + squadra.getGolFattiTrasferta() + ".\n"
-						+ "Quanti gol vuoi aggiungere/togliere? (scrivi il numero senza il simbolo -)");
-				quantitaModifica= scanner.nextInt();
-				System.out.println("Modifica apportata. I gol FATTI in TRASFERTA da " + squadra.getNomeSquadra() +" sono ora " + squadra.setGolFattiTrasferta(quantitaModifica) + ".\n");
-				break;
-			case "2-1":
-				System.out.println("I gol SUBITI in CASA da " + squadra.getNomeSquadra() +" sono " + squadra.getGolSubitiCasa() + ".\n"
-						+ "Quanti gol vuoi aggiungere/togliere? (scrivi il numero senza il simbolo -)");
-				quantitaModifica= scanner.nextInt();
-				System.out.println("Modifica apportata. I gol SUBITI in CASA da " + squadra.getNomeSquadra() +" sono ora " + squadra.setGolSubitiCasa(quantitaModifica) + ".\n");
-				break;
-			case "2-2":
-				System.out.println("I gol SUBITI in TRASFERTA da " + squadra.getNomeSquadra() +" sono " + squadra.getGolSubitiTrasferta() + ".\n"
-						+ "Quanti gol vuoi aggiungere/togliere? (scrivi il numero senza il simbolo -)");
-				quantitaModifica= scanner.nextInt();
-				System.out.println("Modifica apportata. I gol SUBITI in TRASFERTA da " + squadra.getNomeSquadra() +" sono ora " + squadra.setGolSubitiTrasferta(quantitaModifica) + ".\n");
-				break;
-		}
-	}
 
 	public static void VisualizzaPunti(ArrayList <Squadra> elencoSquadre, Scanner scanner) {
 		Squadra squadra;
