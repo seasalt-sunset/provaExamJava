@@ -1,4 +1,5 @@
 package provaEsame2;
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Scansione {
 	
@@ -174,6 +175,15 @@ public class Scansione {
 		VinteOPerse vinteOPerse = VinteOPerse.values()[input];
 
 		return vinteOPerse;
+	}
+	
+	int modPartite_quantitaModifica() {
+		apriScanner();
+		int quantitaModifica = _scanner.nextInt();
+		Print.printModPartite_valorePartite(vinteOPerse, casaOTrasferta, partite, true);
+		chiudiScanner();
+		
+		return quantitaModifica;
 	}
 	
 }

@@ -36,7 +36,7 @@ public class Main {
 				break;
 				
 			case MainMenu.ModificaPartite:
-				PartiteDAO.modificaPartite(listaPartite);
+				PartiteDAO.modificaPartite(listaPartite, listaSquadre);
 				break;
 				
 			case MainMenu.ModificaGol:

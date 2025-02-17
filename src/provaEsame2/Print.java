@@ -49,4 +49,16 @@ public class Print {
 	static void printModPartite_casaOTrasferta() {
 		System.out.println("Vuoi cambiare il valore delle partite giocate in CASA (digita 1), in TRASFERTA (digita 2) o ENTRAMBE (digita 3)?\n");
 	}
+	
+	static void printModPartite_valorePartite(VinteOPerse vinteOPerse, CasaOTrasferta casaOTrasferta, Partite partite, boolean modificaFatta) {
+		String modifica="";
+		if (modificaFatta=true) {
+			modifica.equals("ora ");
+		}
+		System.out.println("Il valore delle partite " + vinteOPerse.toString().toUpperCase() + " giocate in " + casaOTrasferta.toString().toUpperCase() + " da "
+				+ partite.getNomeSquadra() + " e' " + modifica + partite.getPartiteVinteCasa() + ".\n");
+		if (modificaFatta=true) {
+			System.out.println("Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
+		}
+	}
 }

@@ -23,8 +23,6 @@ public class PartiteDAO {
 	}
 	
 	public static void ModificaPartite(ArrayList <Partite> elencoPartite, ArrayList <Squadra> elencoSquadre) {
-		boolean casa, trasferta;
-		casa=false; trasferta=false;
 		CasaOTrasferta casaOTrasferta;
 		VinteOPerse vinteOPerse;
 		int indexSquadra;
@@ -44,36 +42,36 @@ public class PartiteDAO {
 		
 		switch (vinteOPerse) {
 			case Vinte:
-					if (casaOTrasferta=="Casa" || casaOTrasferta=="Entrambe") {
+					if (casaOTrasferta.toString()=="Casa" || casaOTrasferta.toString()=="Entrambe") {
 						ModificaPartiteVinteCasa(elencoPartite, indexSquadra);
 					}
-					if (casaOTrasferta=="Trasferta" || casaOTrasferta=="Entrambe") {
+					if (casaOTrasferta.toString()=="Trasferta" || casaOTrasferta.toString()=="Entrambe") {
 						ModificaPartiteVinteTrasferta(elencoPartite, indexSquadra);
 					}
 				break;
 			case Perse:
-				if (casaOTrasferta=="Casa" || casaOTrasferta=="Entrambe") {
+				if (casaOTrasferta.toString()=="Casa" || casaOTrasferta.toString()=="Entrambe") {
 					ModificaPartitePerseCasa(elencoPartite, indexSquadra);
 				}
-				if (casaOTrasferta=="Trasferta" || casaOTrasferta=="Entrambe") {
+				if (casaOTrasferta.toString()=="Trasferta" || casaOTrasferta.toString()=="Entrambe") {
 					ModificaPartitePerseTrasferta(elencoPartite, indexSquadra);
 				}
 				break;
 			case Pareggiate:
-				if (casaOTrasferta=="Casa" || casaOTrasferta=="Entrambe") {
+				if (casaOTrasferta.toString()=="Casa" || casaOTrasferta.toString()=="Entrambe") {
 					ModificaPartitePareggiateCasa(elencoPartite, indexSquadra);
 				}
-				if (casaOTrasferta=="Trasferta" || casaOTrasferta=="Entrambe") {
+				if (casaOTrasferta.toString()=="Trasferta" || casaOTrasferta.toString()=="Entrambe") {
 					ModificaPartitePareggiateTrasferta(elencoPartite, indexSquadra);
 				}
 				break;
 			case Tutte:
-				if (casaOTrasferta=="Casa" || casaOTrasferta=="Entrambe") {
+				if (casaOTrasferta.toString()=="Casa" || casaOTrasferta.toString()=="Entrambe") {
 					ModificaPartiteVinteCasa(elencoPartite, indexSquadra);
 					ModificaPartitePerseCasa(elencoPartite, indexSquadra);
 					ModificaPartitePareggiateCasa(elencoPartite, indexSquadra);
 				}
-				if (casaOTrasferta=="Trasferta" || casaOTrasferta=="Entrambe") {
+				if (casaOTrasferta.toString()=="Trasferta" || casaOTrasferta.toString()=="Entrambe") {
 					ModificaPartiteVinteTrasferta(elencoPartite, indexSquadra);
 					ModificaPartitePerseTrasferta(elencoPartite, indexSquadra);
 					ModificaPartitePareggiateTrasferta(elencoPartite, indexSquadra);
@@ -85,54 +83,45 @@ public class PartiteDAO {
 	public static void ModificaPartiteVinteCasa(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		
 		Partite modPartite= elencoPartite.get(indexSquadra);
-		System.out.println("Il valore delle partite VINTE giocate in CASA da " +modPartite.getNomeSquadra() + " e' " +modPartite.getPartiteVinteCasa() + ".\n"
-				+ "Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
-		int quantitaModifica = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Il valore delle partite VINTE giocate in CASA da " +modPartite.getNomeSquadra() + " e' ora " +modPartite.setPartiteVinteCasa(quantitaModifica) +".\n");
+		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Casa, modPartite, false);
+		int quantitaModifica= _scansione.modPartite_quantitaModifica();
+		modPartite.setPartiteVinteCasa(quantitaModifica);
+		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Casa, modPartite, true);
 	}
 	public static void ModificaPartitePerseCasa(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		Partite modPartite= elencoPartite.get(indexSquadra);
-		System.out.println("Il valore delle partite PERSE giocate in CASA da " +modPartite.getNomeSquadra() + " e' " +modPartite.getPartitePerseCasa() + ".\n"
-				+ "Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
-		int quantitaModifica = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Il valore delle partite PERSE giocate in CASA da " +modPartite.getNomeSquadra() + " e' ora " +modPartite.setPartitePerseCasa(quantitaModifica) +".\n");
-		
+		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Casa, modPartite, false);
+		int quantitaModifica= _scansione.modPartite_quantitaModifica();
+		modPartite.setPartitePerseCasa(quantitaModifica);
+		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Casa, modPartite, true);
 	}
 	public static void ModificaPartitePareggiateCasa(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		Partite modPartite= elencoPartite.get(indexSquadra);
-		System.out.println("Il valore delle partite PAREGGIATE giocate in CASA da " +modPartite.getNomeSquadra() + " e' " +modPartite.getPartitePareggiateCasa() + ".\n"
-			+ "Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
-		int quantitaModifica = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Il valore delle partite PAREGGIATE giocate in CASA da " +modPartite.getNomeSquadra() + " e' ora " +modPartite.setPartitePareggiateCasa(quantitaModifica) +".\n");
-
+		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Casa, modPartite, false);
+		int quantitaModifica= _scansione.modPartite_quantitaModifica();
+		modPartite.setPartitePerseCasa(quantitaModifica);
+		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Casa, modPartite, true);
 	}
 	public static void ModificaPartiteVinteTrasferta(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		Partite modPartite= elencoPartite.get(indexSquadra);
-		System.out.println("Il valore delle partite VINTE giocate in TRASFERTA da " +modPartite.getNomeSquadra() + " e' " +modPartite.getPartiteVinteTrasferta() +".\n"
-				+ "Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
-		int quantitaModifica = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Il valore delle partite VINTE giocate in TRASFERTA da " +modPartite.getNomeSquadra() + " e' ora " +modPartite.setPartiteVinteTrasferta(quantitaModifica) +".\n");
-		
+		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Trasferta, modPartite, false);
+		int quantitaModifica= _scansione.modPartite_quantitaModifica();
+		modPartite.setPartitePerseCasa(quantitaModifica);
+		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Trasferta, modPartite, true);
 	}
 	public static void ModificaPartitePerseTrasferta(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		Partite modPartite= elencoPartite.get(indexSquadra);
-		System.out.println("Il valore delle partite PERSE giocate in TRASFERTA da " +modPartite.getNomeSquadra() + " e' " +modPartite.getPartitePerseTrasferta() +".\n"
-				+ "Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
-		int quantitaModifica = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Il valore delle partite PERSE giocate in TRASFERTA da " +modPartite.getNomeSquadra() + " e' ora " +modPartite.setPartitePerseTrasferta(quantitaModifica) +".\n");
+		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Trasferta, modPartite, false);
+		int quantitaModifica= _scansione.modPartite_quantitaModifica();
+		modPartite.setPartitePerseCasa(quantitaModifica);
+		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Trasferta, modPartite, true);
 	}
 	public static void ModificaPartitePareggiateTrasferta(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		Partite modPartite= elencoPartite.get(indexSquadra);
-		System.out.println("Il valore delle partite PAREGGIATE giocate in TRASFERTA da " +modPartite.getNomeSquadra() + " e' " +modPartite.getPartitePareggiateTrasferta() +".\n"
-				+ "Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
-		int quantitaModifica = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Il valore delle partite PAREGGIATE giocate in TRASFERTA da " +modPartite.getNomeSquadra() + " e' ora " +modPartite.setPartitePareggiateTrasferta(quantitaModifica) +".\n");
+		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Trasferta, modPartite, false);
+		int quantitaModifica= _scansione.modPartite_quantitaModifica();
+		modPartite.setPartitePerseCasa(quantitaModifica);
+		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Trasferta, modPartite, true);
 	}
 	
 }
