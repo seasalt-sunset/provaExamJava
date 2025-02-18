@@ -124,4 +124,23 @@ public class PartiteDAO {
 		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Trasferta, modPartite, true, modPartite.getPartitePareggiateTrasferta());
 	}
 	
+	
+	public static void VisualizzaPunti(ArrayList <Partite> elencoPartite, ArrayList <Squadra> elencoSquadre) {
+		int indexSquadra;
+		do{
+			String nomeSquadra = _scansione.visualizzaPunti_nomeSquadra();
+			if(nomeSquadra.equalsIgnoreCase("menu")) {
+				return;
+			}
+			indexSquadra = SquadraDAO.trovaIndexSquadra(nomeSquadra, elencoSquadre);
+			if (indexSquadra==(-1)) {
+				System.out.println("Nessuna squadra trovata.");
+			}
+		} while (indexSquadra==(-1));
+		
+		Partite partite = elencoPartite.get(indexSquadra);
+		System.out.println("I punti totalizzati da " + partite.getNomeSquadra() + " sono " + partite.getPunti()+".\n"
+					+ "La media inglese e' " + partite.getMediaInglese());
+	}
+	
 }

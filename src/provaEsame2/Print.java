@@ -2,19 +2,6 @@ package provaEsame2;
 
 public class Print {
 	
-	static void visualizzaDettagli(Squadra squadra) {
-		System.out.println("Ecco i dettagli di " + squadra.getNomeSquadra() + ":\n"
-				+ "Partite Vinte: " + squadra.getPartiteVinte() + " di cui " + squadra.getPartiteVinteCasa() + " in Casa e " + squadra.getPartiteVinteTrasferta() + " in Trasferta\n"
-				+ "Partite Pareggiate: " + squadra.getPartitePareggiate() + " di cui " + squadra.getPartitePareggiateCasa() + " in Casa e " + squadra.getPartitePareggiateTrasferta() + " in Trasferta\n"
-				+ "Partite Perse: " + squadra.getPartitePerse() + " di cui " + squadra.getPartitePerseCasa() + " in Casa e " + squadra.getPartitePerseTrasferta() + " in Trasferta\n"
-				+ "Totale Partite Giocate: " + squadra.getTotPartite() + " di cui " + squadra.getTotPartiteCasa() + " in Casa e " + squadra.getTotPartiteTrasferta() + " in Trasferta\n"
-				+ "Gol Fatti" + squadra.getGolFatti() + " di cui " + squadra.getGolFattiCasa() + " in Casa e " + squadra.getGolFattiTrasferta() + " in Trasferta\n"
-				+ "Gol Subiti" + squadra.getGolSubiti() + " di cui " + squadra.getGolSubitiCasa() + " in Casa e " + squadra.getGolSubitiTrasferta() + " in Trasferta\n"
-				+ "Differenza Gol Fatti - Gol Subiti:" + squadra.getDifferenzaGol() + "\n"
-				+ "Punti: " + squadra.getPunti() + "\n"
-				+ "Media Inglese:" + squadra.getMediaInglese() + "\n");			
-	}
-	
 	static void mainMenu() {
 		System.out.println("MENU DI CAMPIONAPP!!! FORZA BARI E ALCUNE SQUADRE?! SCEGLI TRA LE VARIE OPZIONI:\n"
 				+ "1) Crea Nuova Squadra\n"
@@ -101,6 +88,46 @@ public class Print {
 		if (modificaFatta=true) {
 			System.out.println("Digitare la quantità da aggiungere/rimuovere (se devi rimuoverne inserisci il segno -)\n");
 		}
+	}
+	
+	static void printVisualizzaPunti_nomeSquadra() {
+		System.out.println("Scrivi il nome della Squadra di cui vuoi visualizzare i punti:\n");
+	}
+	
+	static void printVisualizzaDettagli_nomeSquadra() {
+		System.out.println("Scrivi il nome della Squadra di cui vuoi visualizzare i dettagli:\n");
+	}
+	
+	static void printVisualizzaDettagli(Partite partite, Gol gol, String nomeSquadra) {
+		System.out.println("Ecco i dettagli di " + nomeSquadra + ":\n"
+				+ "Partite Vinte: " + partite.getPartiteVinte() + " di cui " + partite.getPartiteVinteCasa() + " in Casa e " + partite.getPartiteVinteTrasferta() + " in Trasferta\n"
+				+ "Partite Pareggiate: " + partite.getPartitePareggiate() + " di cui " + partite.getPartitePareggiateCasa() + " in Casa e " + partite.getPartitePareggiateTrasferta() + " in Trasferta\n"
+				+ "Partite Perse: " + partite.getPartitePerse() + " di cui " + partite.getPartitePerseCasa() + " in Casa e " + partite.getPartitePerseTrasferta() + " in Trasferta\n"
+				+ "Totale Partite Giocate: " + partite.getTotPartite() + " di cui " + partite.getTotPartiteCasa() + " in Casa e " + partite.getTotPartiteTrasferta() + " in Trasferta\n"
+				+ "Gol Fatti: " + gol.getGolFatti() + " di cui " + gol.getGolFattiCasa() + " in Casa e " + gol.getGolFattiTrasferta() + " in Trasferta\n"
+				+ "Gol Subiti: " + gol.getGolSubiti() + " di cui " + gol.getGolSubitiCasa() + " in Casa e " + gol.getGolSubitiTrasferta() + " in Trasferta\n"
+				+ "Differenza Gol Fatti - Gol Subiti: " + gol.getDifferenzaGol() + "\n"
+				+ "Punti: " + partite.getPunti() + "\n"
+				+ "Media Inglese: " + partite.getMediaInglese() + "\n");
+	}
+	
+	static void printClassifica_tipologiaClassifica() {
+		System.out.println("Vuoi vedere la classifica secondo il punteggio normale (digita 1), secondo la media inglese (digita 2) o entrambe (digita 3)?");
+	}
+	
+	static void printAzzeraPunteggio() {
+		System.out.println("Sei sicuro di voler azzerare i punteggi di TUTTE LE SQUADRE? (scrivi 'si' o 'no')");
+
+	}
+	
+	static void printAzzeraPunteggio_cancellazioneAvvenuta() {
+		System.out.println("Cancellazione avvenuta!");
+
+	}
+	
+	static void printAzzeraPunteggio_operazioneAnnullata() {
+		System.out.println("Operazione annullata.");
+
 	}
 	
 }

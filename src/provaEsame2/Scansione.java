@@ -1,5 +1,4 @@
 package provaEsame2;
-import java.util.ArrayList;
 import java.util.Scanner;
 public class Scansione {
 	
@@ -222,5 +221,55 @@ public class Scansione {
 		chiudiScanner();
 		
 		return casaOTrasferta;
+	}
+	
+	String visualizzaPunti_nomeSquadra() {
+		apriScanner();
+		Print.printVisualizzaPunti_nomeSquadra();
+		String nomeSquadra = _scanner.nextLine();
+		chiudiScanner();
+		
+		return nomeSquadra;
+	}
+	
+	String visualizzaDettagli_nomeSquadra() {
+		apriScanner();
+		Print.printVisualizzaDettagli_nomeSquadra();
+		String nomeSquadra = _scanner.nextLine();
+		chiudiScanner();
+		
+		return nomeSquadra;
+	}
+	
+	int classifica_tipologiaClassifica() {
+		apriScanner();
+		int scelta;
+		while(true) {
+		Print.printClassifica_tipologiaClassifica();
+		scelta= _scanner.nextInt();
+		if (scelta>=1 || scelta<=3) {
+			break;
+		}
+		Print.inputErrato();
+		}
+		chiudiScanner();
+		
+		return scelta;
+	}
+	
+	String azzeraPunteggio() {
+		apriScanner();
+		String scelta;
+		while(true) {
+			Print.printAzzeraPunteggio();
+			scelta= _scanner.nextLine();
+			 if (scelta.equalsIgnoreCase("sì") || scelta.equalsIgnoreCase("si") || scelta.equalsIgnoreCase("no")) {
+				 break;
+			 }
+			 Print.inputErrato();
+		}
+		chiudiScanner();
+		
+		return scelta;
 	}
 }
