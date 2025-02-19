@@ -99,28 +99,28 @@ public class PartiteDAO {
 		Partite modPartite= elencoPartite.get(indexSquadra);
 		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Casa, modPartite, false, modPartite.getPartitePareggiateCasa());
 		int quantitaModifica= _scansione.quantitaModifica();
-		modPartite.setPartitePerseCasa(quantitaModifica);
+		modPartite.setPartitePareggiateCasa(quantitaModifica);
 		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Casa, modPartite, true, modPartite.getPartitePareggiateCasa());
 	}
 	public static void ModificaPartiteVinteTrasferta(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		Partite modPartite= elencoPartite.get(indexSquadra);
 		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Trasferta, modPartite, false, modPartite.getPartiteVinteTrasferta());
 		int quantitaModifica= _scansione.quantitaModifica();
-		modPartite.setPartitePerseCasa(quantitaModifica);
+		modPartite.setPartiteVinteTrasferta(quantitaModifica);
 		Print.printModPartite_valorePartite(VinteOPerse.Vinte, CasaOTrasferta.Trasferta, modPartite, true, modPartite.getPartiteVinteTrasferta());
 	}
 	public static void ModificaPartitePerseTrasferta(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		Partite modPartite= elencoPartite.get(indexSquadra);
 		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Trasferta, modPartite, false, modPartite.getPartitePerseTrasferta());
 		int quantitaModifica= _scansione.quantitaModifica();
-		modPartite.setPartitePerseCasa(quantitaModifica);
+		modPartite.setPartitePerseTrasferta(quantitaModifica);
 		Print.printModPartite_valorePartite(VinteOPerse.Perse, CasaOTrasferta.Trasferta, modPartite, true, modPartite.getPartitePerseTrasferta());
 	}
 	public static void ModificaPartitePareggiateTrasferta(ArrayList<Partite> elencoPartite, int indexSquadra) {
 		Partite modPartite= elencoPartite.get(indexSquadra);
 		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Trasferta, modPartite, false, modPartite.getPartitePareggiateTrasferta());
 		int quantitaModifica= _scansione.quantitaModifica();
-		modPartite.setPartitePerseCasa(quantitaModifica);
+		modPartite.setPartitePareggiateTrasferta(quantitaModifica);
 		Print.printModPartite_valorePartite(VinteOPerse.Pareggiate, CasaOTrasferta.Trasferta, modPartite, true, modPartite.getPartitePareggiateTrasferta());
 	}
 	

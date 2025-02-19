@@ -69,5 +69,6 @@ public class Main {
 			}
 			
 		} while(sceltaMenu!=MainMenu.Esci);
+	_scansione.chiudiScanner();
 	}
 }

@@ -91,11 +91,11 @@ public class Print {
 	}
 	
 	static void printVisualizzaPunti_nomeSquadra() {
-		System.out.println("Scrivi il nome della Squadra di cui vuoi visualizzare i punti:\n");
+		System.out.println("Scrivi il nome della Squadra di cui vuoi visualizzare i punti.\nScrivi 'menu' per tornare al menu principale\n");
 	}
 	
 	static void printVisualizzaDettagli_nomeSquadra() {
-		System.out.println("Scrivi il nome della Squadra di cui vuoi visualizzare i dettagli:\n");
+		System.out.println("Scrivi il nome della Squadra di cui vuoi visualizzare i dettagli.\nScrivi 'menu' per tornare al menu principale\n");
 	}
 	
 	static void printVisualizzaDettagli(Partite partite, Gol gol, String nomeSquadra) {
